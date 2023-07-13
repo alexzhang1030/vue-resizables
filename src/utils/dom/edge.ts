@@ -9,7 +9,7 @@ export enum Edge {
   BOTTOM_RIGHT,
 }
 
-const THRESHOLD = 5
+const THRESHOLD = 15
 
 export function isInEdge(element: HTMLElement, x: number, y: number) {
   const { left, right, top, bottom } = element.getBoundingClientRect()

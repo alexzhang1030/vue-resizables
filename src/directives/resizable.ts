@@ -20,20 +20,20 @@ type PosFn = (
 ) => { width: number; height: number }
 
 const fns: Record<Edge, PosFn> = {
-  [Edge.LEFT]: ({ width, height }, { x }, { x: px }) => ({ width: width + (x + px), height }),
+  [Edge.LEFT]: ({ width, height }, { x }, { x: px }) => ({ width: width + (px - x), height }),
   [Edge.RIGHT]: ({ width, height }, { x }, { x: px }) => ({ width: width + (x - px), height }),
-  [Edge.TOP]: ({ height, width }, { y }, { y: py }) => ({ width, height: height + (y + py) }),
+  [Edge.TOP]: ({ height, width }, { y }, { y: py }) => ({ width, height: height + (py - y) }),
   [Edge.BOTTOM]: ({ height, width }, { y }, { y: py }) => ({ width, height: height + (y - py) }),
   [Edge.TOP_LEFT]: ({ width, height }, { x, y }, { x: px, y: py }) => ({
-    width: width + (x + px),
-    height: height + (y + py),
+    width: width + (px - x),
+    height: height + (py - y),
   }),
   [Edge.TOP_RIGHT]: ({ width, height }, { x, y }, { x: px, y: py }) => ({
     width: width + (x - px),
-    height: height + (y + py),
+    height: height + (py - y),
   }),
   [Edge.BOTTOM_LEFT]: ({ width, height }, { x, y }, { x: px, y: py }) => ({
-    width: width + (x + px),
+    width: width + (px - x),
     height: height + (y - py),
   }),
   [Edge.BOTTOM_RIGHT]: ({ width, height }, { x, y }, { x: px, y: py }) => ({
@@ -57,16 +57,18 @@ function useDragging(el: HTMLElement) {
   let oldCursor = ''
   useEventListener('pointermove', (e: MouseEvent) => {
     if (isDragging.value) {
+      window.document.body.style.userSelect = 'none'
       return usePosition(el, e, moveType.value!, previousPosition.value, (x, y) => {
         previousPosition.value = { x, y }
       })
     }
+    window.document.body.style.userSelect = 'auto'
     if (!oldCursor)
       oldCursor = getComputedStyle(document.body).getPropertyValue('cursor')
     const { x, y } = e
     const result = isInEdge(el, x, y)
     const [type, cursor] = cursors.find(([edge]) => result[edge]) ?? [null, null]
-    document.body.style.cursor = cursor ?? oldCursor
+    window.document.body.style.cursor = cursor ?? oldCursor
     inPosition.value = !!cursor
     moveType.value = type
   })
