@@ -30,7 +30,7 @@
     "build:watch": "vite build --watch",
     "build": "vite build",
     "prepublishOnly": "pnpm run build",
-    "release": "vitest run && bumpp --commit \"chore: release v%s\" --push --tag && pnpm publish"
+    "release": "bumpp --commit \"chore: release v%s\" --push --tag && pnpm publish"
   },
   "peerDependencies": {
     "vue": "^3.0.0"
