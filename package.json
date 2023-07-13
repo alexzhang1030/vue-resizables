@@ -1,7 +1,7 @@
 {
   "name": "vue-resizables",
   "type": "module",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "The resizable utilities of Vue.",
   "author": "alexzhang1030",
   "license": "MIT",
@@ -9,7 +9,11 @@
     "type": "git",
     "url": "git+https://github.com/alexzhang1030/vue-resizables.git"
   },
-  "keywords": ["vue", "resizable", "resize"],
+  "keywords": [
+    "vue",
+    "resizable",
+    "resize"
+  ],
   "exports": {
     ".": {
       "default": "./dist/index.js",
