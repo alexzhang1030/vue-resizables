@@ -1,0 +1,63 @@
+{
+  "name": "vue-resizables",
+  "type": "module",
+  "version": "0.0.0",
+  "description": "The resizable utilities of Vue.",
+  "author": "alexzhang1030",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexzhang1030/vue-resizables.git"
+  },
+  "keywords": [],
+  "exports": {
+    ".": {
+      "default": "./dist/index.js",
+      "types": "./dist/types/index.d.ts",
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.js"
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/types/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "lint": "eslint .",
+    "prepare": "simple-git-hooks",
+    "build:watch": "vite build --watch",
+    "build": "vite build",
+    "prepublishOnly": "pnpm run build",
+    "release": "vitest run && bumpp --commit \"chore: release v%s\" --push --tag && pnpm publish"
+  },
+  "peerDependencies": {
+    "vue": "^3.0.0"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config-ts": "^0.39.7",
+    "@types/node": "^20.4.2",
+    "@vitejs/plugin-vue-jsx": "^3.0.1",
+    "@vueuse/core": "^10.2.1",
+    "bumpp": "^9.1.1",
+    "eslint": "^8.44.0",
+    "lint-staged": "^13.2.3",
+    "simple-git-hooks": "^2.8.1",
+    "typescript": "^5.1.6",
+    "vite": "^4.4.3",
+    "vite-plugin-dts": "^3.2.0",
+    "vue": "^3.3.4"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm exec lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,ts,json,md,yaml,yml}": [
+      "eslint --fix"
+    ]
+  },
+  "eslintConfig": {
+    "extends": "@antfu/eslint-config-ts"
+  }
+}
