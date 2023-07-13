@@ -34,7 +34,10 @@
     "build:watch": "vite build --watch",
     "build": "vite build",
     "prepublishOnly": "pnpm run build",
-    "release": "bumpp --commit \"chore: release v%s\" --push --tag && pnpm publish"
+    "release": "bumpp --commit \"chore: release v%s\" --push --tag && pnpm publish",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
   },
   "peerDependencies": {
     "vue": "^3.0.0"
@@ -51,6 +54,7 @@
     "typescript": "^5.1.6",
     "vite": "^4.4.3",
     "vite-plugin-dts": "^3.2.0",
+    "vitepress": "1.0.0-beta.5",
     "vue": "^3.3.4"
   },
   "simple-git-hooks": {

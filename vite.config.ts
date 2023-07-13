@@ -30,6 +30,7 @@ export default defineConfig({
     dts({
       cleanVueFileName: true,
       outDir: 'dist/types',
+      include: ['src/**/*'],
     }),
   ],
 })
