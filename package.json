@@ -9,7 +9,7 @@
     "type": "git",
     "url": "git+https://github.com/alexzhang1030/vue-resizables.git"
   },
-  "keywords": [],
+  "keywords": ["vue", "resizable", "resize"],
   "exports": {
     ".": {
       "default": "./dist/index.js",
