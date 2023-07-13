@@ -66,6 +66,7 @@
     ]
   },
   "eslintConfig": {
-    "extends": "@antfu/eslint-config-ts"
+    "extends": "@antfu/eslint-config-ts",
+    "ignorePatterns": ["dist", "node_modules", "docs/.vitepress/dist", "docs/.vitepress/cache"]
   }
 }
