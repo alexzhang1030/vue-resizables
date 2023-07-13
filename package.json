@@ -1,7 +1,7 @@
 {
   "name": "vue-resizables",
   "type": "module",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "The resize utilities of Vue.",
   "author": "alexzhang1030",
   "license": "MIT",
@@ -67,6 +67,11 @@
   },
   "eslintConfig": {
     "extends": "@antfu/eslint-config-ts",
-    "ignorePatterns": ["dist", "node_modules", "docs/.vitepress/dist", "docs/.vitepress/cache"]
+    "ignorePatterns": [
+      "dist",
+      "node_modules",
+      "docs/.vitepress/dist",
+      "docs/.vitepress/cache"
+    ]
   }
 }
