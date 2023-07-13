@@ -1,6 +1,6 @@
 # vue-resizables
 
-The resizable utilities of Vue@3.
+The resize utilities of Vue@3.
 
 ## Installation
 

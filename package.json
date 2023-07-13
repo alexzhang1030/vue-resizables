@@ -2,7 +2,7 @@
   "name": "vue-resizables",
   "type": "module",
   "version": "0.0.1",
-  "description": "The resizable utilities of Vue.",
+  "description": "The resize utilities of Vue.",
   "author": "alexzhang1030",
   "license": "MIT",
   "repository": {
