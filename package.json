@@ -20,6 +20,9 @@
       "types": "./dist/types/index.d.ts",
       "require": "./dist/index.cjs",
       "import": "./dist/index.js"
+    },
+    "./style": {
+      "default": "./dist/style.css"
     }
   },
   "main": "./dist/index.cjs",

@@ -1,9 +1,16 @@
 <script setup lang="ts">
-import { Resizable as vResizable } from 'vue-resizables'
+import { vResizable } from 'vue-resizables'
+import 'vue-resizables/style'
 </script>
 
 <template>
-  <div class="template" v-resizable>
+  <div class="template" v-resizable="{
+    edge: {
+      bottom: true,
+      right: true,
+    },
+    renderBorder: true
+  }">
 
   </div>
 </template>

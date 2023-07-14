@@ -11,6 +11,8 @@ import Resizable from '../components/directives/Resizable.vue'
 ```vue
 <script setup lang="ts">
 import { vResizable } from 'vue-resizables'
+// optional if only need the logic
+import 'vue-resizables/style'
 </script>
 <template>
   <div v-resizable="{
@@ -59,4 +61,6 @@ will enable:
 
 ### `renderBorder`
 
-If `true`, the border of the element will be rendered.
+> `required import 'vue-resizables/style'` to work.
+
+If `true`, the border of the element will be rendered. 
