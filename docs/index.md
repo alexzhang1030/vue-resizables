@@ -3,14 +3,15 @@
 layout: home
 
 hero:
-  name: "Vue Resizables"
-  text: "The resize utilities of Vue."
+  name: Vue Resizables
+  text: The resize utilities of Vue.
+  image:
+    src: /logo-with-shadow.png
+    alt: Vue Resizables
   actions:
     - theme: brand
       text: Get Started 
       link: /get-started/
-  image:
-    src: /logo.svg
   
 
 # features:
