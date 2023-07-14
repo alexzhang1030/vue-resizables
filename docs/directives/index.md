@@ -13,7 +13,7 @@ import Resizable from '../components/directives/Resizable.vue'
 import { vResizable } from 'vue-resizables'
 </script>
 <template>
-  <div ref="el" class="template" v-resizable:edge.right.bottom></div>
+  <div v-resizable:edge.right.bottom></div>
 </template>
 ```
 
