@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { vResizable } from 'vue-resizables'
-import 'vue-resizables/style'
 </script>
 
 <template>

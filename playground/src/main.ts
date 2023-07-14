@@ -1,4 +1,8 @@
 import { createApp } from 'vue'
+import { vResizable } from 'vue-resizables'
+import 'vue-resizables/style'
 import App from './App.vue'
 
-createApp(App).mount('#app')
+const app = createApp(App)
+
+createApp(App).directive('resizable', vResizable).mount('#app')

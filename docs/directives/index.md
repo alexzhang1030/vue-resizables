@@ -25,6 +25,15 @@ import 'vue-resizables/style'
 </template>
 ```
 
+Or you can globally register this directive(but will lose the type support):
+
+```ts
+import { vResizable } from 'vue-resizables'
+import 'vue-resizables/style'
+
+createApp(App).directive('resizable', vResizable).mount('#app')
+```
+
 ## Config 
 
 | Name          | Type                    | Default              |
