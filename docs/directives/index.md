@@ -61,6 +61,6 @@ will enable:
 
 ### `renderBorder`
 
-> `required import 'vue-resizables/style'` to work.
+> **required** `import 'vue-resizables/style` to work.
 
 If `true`, the border of the element will be rendered. 
