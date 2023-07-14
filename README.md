@@ -14,7 +14,7 @@ pnpm i vue-resizables
 
 ```vue
 <script setup lang="ts">
-import { Resizable as vResizable } from 'vue-resizables'
+import { vResizable } from 'vue-resizables'
 </script>
 
 <template>

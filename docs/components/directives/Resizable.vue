@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {  ref } from 'vue'
-import { Resizable as vResizable } from '@/directives'
+import { vResizable } from '@/directives'
 import { useElementSize } from '@vueuse/core';
 
 const el = ref<HTMLElement | null>(null)

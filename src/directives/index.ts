@@ -1,1 +1,1 @@
-export { Resizable } from './resizable'
+export { Resizable as vResizable } from './resizable'
