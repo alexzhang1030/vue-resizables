@@ -10,17 +10,7 @@ pnpm i vue-resizables
 
 ## Features
 
-### Directives
-
-```vue
-<script setup lang="ts">
-import { vResizable } from 'vue-resizables'
-</script>
-
-<template>
-  <div v-resizable></div>
-</template>
-```
+See [docs](https://vue-resizables.vercel.app/)
 
 ## License
 
