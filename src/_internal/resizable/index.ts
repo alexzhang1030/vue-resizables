@@ -1,5 +1,5 @@
 import { ref } from 'vue'
-import { useEventListener } from '@vueuse/core'
+import { useEventListener, useThrottleFn } from '@vueuse/core'
 import { useCursors } from './cursor'
 import { type ResizableConfig, parseConfig } from './config'
 import { updatePosition } from './position'
@@ -22,7 +22,7 @@ export function useResizable(el: ResizableEl, rawConfig: ResizableConfig) {
 
   const { updateCursor } = useCursors(config.edge)
 
-  useEventListener('pointermove', (e: MouseEvent) => {
+  useEventListener('pointermove', useThrottleFn((e: MouseEvent) => {
     if (isDragging.value) {
       updateCursor(true)
       window.document.body.style.userSelect = 'none'
@@ -44,7 +44,8 @@ export function useResizable(el: ResizableEl, rawConfig: ResizableConfig) {
     const [type, cursor] = updateCursor(result)
     canDrag.value = !!cursor
     moveType.value = type
-  })
+  }, config.throttleTime))
+
   useEventListener('pointerdown', (e) => {
     if (!canDrag.value)
       return

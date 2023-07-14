@@ -1,8 +1,18 @@
 import { BaseEdge, type Edge, ExtendedEdge, notDefined } from '@/utils'
 
 export interface ResizableConfig {
+  /**
+   * @default Record<Edge, boolean>
+   */
   edge: Partial<Record<Edge, boolean>>
+  /**
+   * @default false
+   */
   renderBorder?: boolean
+  /**
+   * @default 15
+   */
+  throttleTime?: number
 }
 
 export const defaultConfig: ResizableConfig = {
@@ -17,6 +27,7 @@ export const defaultConfig: ResizableConfig = {
     [ExtendedEdge.BOTTOM_RIGHT]: false,
   },
   renderBorder: false,
+  throttleTime: 15,
 }
 
 function autoEnableExtendedEdges(edge: Partial<ResizableConfig['edge']>): ResizableConfig['edge'] {
@@ -36,6 +47,7 @@ function autoEnableExtendedEdges(edge: Partial<ResizableConfig['edge']>): Resiza
 
 export function parseConfig(config: Partial<ResizableConfig>): ResizableConfig {
   return {
+    ...defaultConfig,
     ...config,
     edge: autoEnableExtendedEdges(config.edge ?? {}),
   }

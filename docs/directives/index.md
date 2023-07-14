@@ -40,6 +40,7 @@ createApp(App).directive('resizable', vResizable).mount('#app')
 | ------------- | ----------------------- | -------------------- |
 | edge          | `Record<Edge, boolean>` | `Record<Edge, false>` |
 | renderBorder  | `boolean`               | `false`              |
+| throttleTime  | `number`                | 15                   |
 
 ### `edge`
 
