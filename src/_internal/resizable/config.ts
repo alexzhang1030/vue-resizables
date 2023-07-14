@@ -17,7 +17,7 @@ export const defaultConfig: ResizableConfig = {
   },
 }
 
-function autoEnableCombinedEdges(edge: Partial<ResizableConfig['edge']>): ResizableConfig['edge'] {
+function autoEnableExtendedEdges(edge: Partial<ResizableConfig['edge']>): ResizableConfig['edge'] {
   if (edge[BaseEdge.LEFT] && edge[BaseEdge.TOP] && notDefined(edge[ExtendedEdge.TOP_LEFT]))
     edge[ExtendedEdge.TOP_LEFT] = true
   if (edge[BaseEdge.RIGHT] && edge[BaseEdge.TOP] && notDefined(edge[ExtendedEdge.TOP_RIGHT]))
@@ -34,6 +34,6 @@ function autoEnableCombinedEdges(edge: Partial<ResizableConfig['edge']>): Resiza
 
 export function parseConfig(config: Partial<ResizableConfig>): ResizableConfig {
   return {
-    edge: autoEnableCombinedEdges(config.edge ?? {}),
+    edge: autoEnableExtendedEdges(config.edge ?? {}),
   }
 }

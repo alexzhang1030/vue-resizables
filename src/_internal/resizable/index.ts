@@ -1,8 +1,8 @@
 import { ref } from 'vue'
 import { useEventListener } from '@vueuse/core'
-import { fns } from './data'
 import { useCursors } from './cursor'
 import { type ResizableConfig, parseConfig } from './config'
+import { updatePosition } from './position'
 import type { Edge } from '@/utils'
 import { isInEdge } from '@/utils'
 
@@ -22,9 +22,17 @@ export function useResizable(el: ResizableEl, rawConfig: ResizableConfig) {
     if (isDragging.value) {
       updateCursor(true)
       window.document.body.style.userSelect = 'none'
-      return usePosition(el, e, moveType.value!, previousPosition.value, (x, y) => {
-        previousPosition.value = { x, y }
+      updatePosition({
+        el,
+        e,
+        type: moveType.value!,
+        initialPosition: previousPosition.value,
+        postUpdate: (x, y) => {
+          previousPosition.value = { x, y }
+        },
+        config: config.edge,
       })
+      return
     }
     window.document.body.style.userSelect = 'auto'
     const { x, y } = e
@@ -45,17 +53,4 @@ export function useResizable(el: ResizableEl, rawConfig: ResizableConfig) {
   useEventListener('pointerleave', () => {
     isDragging.value = false
   })
-}
-
-function usePosition(
-  el: HTMLElement, e: MouseEvent,
-  type: Edge, initialPosition: { x: number; y: number },
-  postUpdate: (x: number, y: number) => void,
-) {
-  const { width, height } = el.getBoundingClientRect()
-  const { x, y } = e
-  const { width: finalWidth, height: finalHeight } = fns[type]({ width, height }, { x, y }, initialPosition)
-  el.style.width = `${finalWidth}px`
-  el.style.height = `${finalHeight}px`
-  postUpdate(x, y)
 }
