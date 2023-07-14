@@ -17,7 +17,7 @@ const { width, height } = useElementSize(el)
 .template {
   width: 300px;
   height: 300px;
-  background-color: lightgray;
+  background-color: #42B88345;
   display: flex;
   justify-content: center;
   align-items: center;
