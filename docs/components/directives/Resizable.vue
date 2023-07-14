@@ -8,18 +8,12 @@ const el = ref<HTMLElement | null>(null)
 const { width, height } = useElementSize(el)
 </script>
 <template>
-  <div class="p">
-    <div ref="el" class="template" v-resizable:edge.right.bottom>
-      width: {{ width }}<br>
-      height: {{ height }}
-    </div>
+  <div ref="el" class="template" v-resizable:edge.top-right.right.bottom>
+    width: {{ width }}<br>
+    height: {{ height }}
   </div>
 </template>
 <style scoped>
-.p {
-  width: 300px;
-  height: 500px;
-}
 .template {
   width: 300px;
   height: 300px;

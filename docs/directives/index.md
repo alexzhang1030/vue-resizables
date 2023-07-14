@@ -9,3 +9,37 @@ import Resizable from '../components/directives/Resizable.vue'
 - `v-resizable`
 
 <Resizable />
+
+```vue
+<script setup lang="ts">
+import { vResizable } from '@/directives'
+</script>
+<template>
+  <div ref="el" class="template" v-resizable:edge.right.bottom></div>
+</template>
+```
+
+By default, the edges of the element are _not_ resizable. You should pass the edges that you want to resize:
+
+Allowed edges:
+
+- `top`
+- `right`
+- `bottom`
+- `left`
+
+And the corners:
+
+- `top-left`
+- `top-right`
+- `bottom-left`
+- `bottom-right`
+
+e.g. `v-resizable:edge.top.left.right-bottom`:
+
+will enable:
+
+- `top`
+- `left`
+- `top-left`
+- `right-bottom`
