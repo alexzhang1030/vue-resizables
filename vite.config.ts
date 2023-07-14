@@ -2,6 +2,7 @@ import { resolve } from 'node:path'
 import { defineConfig } from 'vite'
 import VueJSX from '@vitejs/plugin-vue-jsx'
 import dts from 'vite-plugin-dts'
+import UnoCSS from 'unocss/vite'
 
 export default defineConfig({
   build: {
@@ -32,5 +33,6 @@ export default defineConfig({
       outDir: 'dist/types',
       include: ['src/**/*'],
     }),
+    UnoCSS(),
   ],
 })

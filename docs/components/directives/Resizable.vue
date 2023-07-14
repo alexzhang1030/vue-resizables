@@ -8,7 +8,13 @@ const el = ref<HTMLElement | null>(null)
 const { width, height } = useElementSize(el)
 </script>
 <template>
-  <div ref="el" class="template" v-resizable:edge.top-right.right.bottom>
+  <div ref="el" class="template" v-resizable="{
+    edge: {
+      bottom: true,
+      right: true,
+    },
+    renderBorder: true
+  }">
     width: {{ width }}<br>
     height: {{ height }}
   </div>

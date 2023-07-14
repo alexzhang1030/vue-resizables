@@ -11,3 +11,5 @@ export function oneOf<T>(value: T, values: T[]): boolean {
 }
 
 export const notDefined = <T>(value: T | undefined): value is undefined => value === undefined
+
+export const getIntersection = <T>(a: T[], b: T[]): T[] => a.filter(v => b.includes(v))

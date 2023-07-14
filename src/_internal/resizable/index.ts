@@ -3,6 +3,7 @@ import { useEventListener } from '@vueuse/core'
 import { useCursors } from './cursor'
 import { type ResizableConfig, parseConfig } from './config'
 import { updatePosition } from './position'
+import { renderBorder } from './border'
 import type { Edge } from '@/utils'
 import { isInEdge } from '@/utils'
 
@@ -15,6 +16,9 @@ export function useResizable(el: ResizableEl, rawConfig: ResizableConfig) {
   const canDrag = ref(false)
   const moveType = ref<Edge | null>(null)
   const previousPosition = ref({ x: 0, y: 0 })
+
+  if (config.renderBorder)
+    renderBorder(el, config.edge, moveType)
 
   const { updateCursor } = useCursors(config.edge)
 
