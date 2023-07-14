@@ -2,9 +2,9 @@
 import Resizable from '../components/directives/Resizable.vue'
 </script>
 
-# Directives
+# `v-resizable` 
 
-## `v-resizable`
+## Preview
 
 <Resizable />
 
@@ -13,11 +13,24 @@ import Resizable from '../components/directives/Resizable.vue'
 import { vResizable } from 'vue-resizables'
 </script>
 <template>
-  <div v-resizable:edge.right.bottom></div>
+  <div v-resizable="{
+    edge: {
+      bottom: true,
+      right: true,
+    },
+    renderBorder: true
+  }"></div>
 </template>
 ```
 
-### Options
+## Config 
+
+| Name          | Type                    | Default              |
+| ------------- | ----------------------- | -------------------- |
+| edge          | `Record<Edge, boolean>` | `Record<Edge, false>` |
+| renderBorder  | `boolean`               | `false`              |
+
+### `edge`
 
 By default, the edges of the element are _not_ resizable. You should pass the edges that you want to resize:
 
@@ -43,3 +56,7 @@ will enable:
 - `left`
 - `top-left`
 - `right-bottom`
+
+### `renderBorder`
+
+If `true`, the border of the element will be rendered.

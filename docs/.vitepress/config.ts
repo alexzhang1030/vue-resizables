@@ -33,7 +33,7 @@ export default defineConfig({
       {
         text: 'Directives',
         items: [
-          { text: 'Resize', link: '/directives/' },
+          { text: 'vResizable', link: '/directives/' },
         ],
       },
     ],
