@@ -10,7 +10,7 @@ import Resizable from '../components/directives/Resizable.vue'
 
 ```vue
 <script setup lang="ts">
-import { vResizable } from '@/directives'
+import { vResizable } from 'vue-resizables'
 </script>
 <template>
   <div ref="el" class="template" v-resizable:edge.right.bottom></div>
