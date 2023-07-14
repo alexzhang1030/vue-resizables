@@ -28,7 +28,7 @@ Allowed edges:
 - `bottom`
 - `left`
 
-And the corners:
+And the corners(will auto enabled if you enable the related edges):
 
 - `top-left`
 - `top-right`
