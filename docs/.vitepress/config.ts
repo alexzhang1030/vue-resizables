@@ -22,6 +22,7 @@ export default defineConfig({
       { text: 'Home', link: '/' },
       { text: 'Directives', link: '/directives/' },
       { text: 'Components', link: '/comps/' },
+      { text: 'Config', link: '/config/' },
     ],
 
     sidebar: [
@@ -41,6 +42,12 @@ export default defineConfig({
         text: 'Components',
         items: [
           { text: 'Resizable', link: '/comps/resizable' },
+        ],
+      },
+      {
+        text: 'Config',
+        items: [
+          { text: 'Resizable', link: '/config/resizable' },
         ],
       },
     ],

@@ -23,7 +23,7 @@ import { Resizable } from 'vue-resizables'
 
 <template>
   <Resizable
-    class="w-300px h-300px" :config="{ // [!code focus]
+    class="w-300px h-300px" :config="{
       edge: {
         right: true,
         bottom: true,
@@ -32,7 +32,6 @@ import { Resizable } from 'vue-resizables'
     }"
   >
     <div class="w-full h-full">
-      // [!code focus]
       <!-- content -->
     </div>
   </Resizable>

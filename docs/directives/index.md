@@ -43,45 +43,28 @@ createApp(App).directive('resizable', vResizable).mount('#app')
 
 ## Config 
 
-| Name          | Type                       | Default              |
-| ------------- | ---------------------------| -------------------- |
-| edge          | `Record<Edge, boolean>`    | `Record<Edge, false>`|
-| border        | `boolean` or `BorderConfig`| `false`              |
-| throttleTime  | `number`                   | 15                   |
-
-### `edge`
-
-By default, the edges of the element are _not_ resizable. You should pass the edges that you want to resize:
-
-Allowed edges:
-
-- `top`
-- `right`
-- `bottom`
-- `left`
-
-And the corners(will auto enabled if you enable the related edges):
-
-- `top-left`
-- `top-right`
-- `bottom-left`
-- `bottom-right`
-
-e.g. `v-resizable:edge.top.left.right-bottom`:
-
-will enable:
-
-- `top`
-- `left`
-- `top-left`
-- `right-bottom`
-
-### `border`
-
-> **required** `import 'vue-resizables/style` to work.
-
-If `true`, the border of the element will be rendered. 
-
+See [config](/config/resizable) for more details.
 ## Custom border
 
 <CustomBorder />
+
+```vue
+<template>
+  <div
+    v-resizable="{
+      edge: {
+        bottom: true,
+        right: true,
+      },
+      border: {
+        render: true,
+        style: {
+          headless: true,
+          class: 'bg-lightblue',
+          size: 2,
+        },
+      },
+    }"
+  />
+</template>
+```
