@@ -4,23 +4,27 @@ import 'vue-resizables/style'
 </script>
 
 <template>
-  <div
-    v-resizable="{
-      edge: {
-        bottom: true,
-        right: true,
-      },
-      border: true,
-    }" class="template"
-  >
-    <p>hello</p>
+  <div class="w-100vw h-100vh flex justify-center items-center">
+    <div
+      v-resizable="{
+        edge: {
+          bottom: true,
+          right: true,
+          left: true,
+          top: true,
+        },
+        border: {
+          render: true,
+          style: {
+            headless: true,
+            size: 2,
+            color: 'red',
+          },
+        },
+      }"
+      class="w-300px h-300px bg-lightblue-1"
+    >
+      <p>hello</p>
+    </div>
   </div>
 </template>
-
-<style>
-  .template {
-    width: 500px;
-    height: 500px;
-    background-color: gray;
-  }
-</style>

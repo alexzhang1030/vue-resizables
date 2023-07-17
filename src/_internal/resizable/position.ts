@@ -43,9 +43,9 @@ export function updatePosition({
 
 ) {
   const { width, height } = el.getBoundingClientRect()
-  const { x, y } = e
+  const { clientX, clientY } = e
   const posFns = getPosFns(config)
-  const { width: finalWidth, height: finalHeight } = posFns[type]({ width, height }, { x, y }, initialPosition)
+  const { width: finalWidth, height: finalHeight } = posFns[type]({ width, height }, { x: clientX, y: clientY }, initialPosition)
   el.style.width = `${finalWidth}px`
   el.style.height = `${finalHeight}px`
 }

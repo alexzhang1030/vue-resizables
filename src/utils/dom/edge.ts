@@ -14,38 +14,27 @@ export enum ExtendedEdge {
 
 export type Edge = BaseEdge | ExtendedEdge
 
-const THRESHOLD = 5
+const TOLERANCE = 5
 
 export type IsInEdgeResult = Record<Edge, boolean>
 
-function isInScope({
-  left, right, bottom, top, x, y,
-}: {
-  left: number
-  top: number
-  right: number
-  bottom: number
-  x: number
-  y: number
-}, direction: 'x' | 'y') {
-  return direction === 'x'
-    ? x >= left && x <= right
-    : y >= top && y <= bottom
-}
-
 export function isInEdge(element: HTMLElement, x: number, y: number): IsInEdgeResult {
   const { left, right, top, bottom } = element.getBoundingClientRect()
+  const abs = Math.abs
+  const aroundY = (y - bottom) < TOLERANCE && (y - top) > -TOLERANCE
+  const aroundX = (x - right) < TOLERANCE && (x - left) > -TOLERANCE
+
   const result = {
-    [BaseEdge.LEFT]: Math.abs(x - left) < THRESHOLD && isInScope({ left, right, bottom, top, x, y }, 'y'),
-    [BaseEdge.RIGHT]: Math.abs(x - right) < THRESHOLD && isInScope({ left, right, bottom, top, x, y }, 'y'),
-    [BaseEdge.TOP]: Math.abs(y - top) < THRESHOLD && isInScope({ left, right, bottom, top, x, y }, 'x'),
-    [BaseEdge.BOTTOM]: Math.abs(y - bottom) < THRESHOLD && isInScope({ left, right, bottom, top, x, y }, 'x'),
+    [BaseEdge.LEFT]: (abs(x - left) < TOLERANCE) && aroundY,
+    [BaseEdge.RIGHT]: (abs(x - right) < TOLERANCE) && aroundY,
+    [BaseEdge.TOP]: (abs(y - top) < TOLERANCE) && aroundX,
+    [BaseEdge.BOTTOM]: (abs(y - bottom) < TOLERANCE) && aroundX,
   }
   return {
     ...result,
-    [ExtendedEdge.TOP_LEFT]: result[BaseEdge.TOP] && result[BaseEdge.LEFT],
-    [ExtendedEdge.TOP_RIGHT]: result[BaseEdge.TOP] && result[BaseEdge.RIGHT],
-    [ExtendedEdge.BOTTOM_LEFT]: result[BaseEdge.BOTTOM] && result[BaseEdge.LEFT],
-    [ExtendedEdge.BOTTOM_RIGHT]: result[BaseEdge.BOTTOM] && result[BaseEdge.RIGHT],
+    [ExtendedEdge.TOP_LEFT]: result[BaseEdge.LEFT] && result[BaseEdge.TOP],
+    [ExtendedEdge.TOP_RIGHT]: result[BaseEdge.RIGHT] && result[BaseEdge.TOP],
+    [ExtendedEdge.BOTTOM_LEFT]: result[BaseEdge.LEFT] && result[BaseEdge.BOTTOM],
+    [ExtendedEdge.BOTTOM_RIGHT]: result[BaseEdge.RIGHT] && result[BaseEdge.BOTTOM],
   }
 }

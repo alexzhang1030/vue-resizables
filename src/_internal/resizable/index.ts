@@ -39,12 +39,12 @@ export function useResizable(el: ResizableEl, resizableConfig: ResizableConfig) 
         initialPosition: previousPosition.value,
         config: config.edge,
       })
-      previousPosition.value = { x: e.x, y: e.y }
+      previousPosition.value = { x: e.clientX, y: e.clientY }
       return
     }
     window.document.body.style.userSelect = 'auto'
-    const { x, y } = e
-    const result = isInEdge(el, x, y)
+    const { clientX, clientY } = e
+    const result = isInEdge(el, clientX, clientY)
     const [type, cursor] = updateCursor(result)
     canDrag.value = !!cursor
     moveType.value = type
