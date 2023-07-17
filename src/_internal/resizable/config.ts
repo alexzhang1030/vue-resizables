@@ -1,5 +1,11 @@
 import { BaseEdge, type Edge, ExtendedEdge, notDefined } from '@/utils'
 
+export interface ResizableBorderConfig {
+  render: true
+  headless: boolean
+  customClass: string // '$$headless' for headless
+}
+
 export interface ResizableConfig {
   /**
    * @default Record<Edge, boolean>
@@ -8,7 +14,7 @@ export interface ResizableConfig {
   /**
    * @default false
    */
-  renderBorder?: boolean
+  border?: boolean | ResizableBorderConfig
   /**
    * @default 15
    */
@@ -26,7 +32,7 @@ export const defaultConfig: ResizableConfig = {
     [ExtendedEdge.BOTTOM_LEFT]: false,
     [ExtendedEdge.BOTTOM_RIGHT]: false,
   },
-  renderBorder: false,
+  border: false,
   throttleTime: 15,
 }
 

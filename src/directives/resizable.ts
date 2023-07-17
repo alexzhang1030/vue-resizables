@@ -1,6 +1,5 @@
 import { type Directive } from 'vue'
-import { useResizable } from '@/_internal'
-import type { ResizableConfig } from '@/_internal/resizable/config'
+import { type ResizableConfig, useResizable } from '@/composables'
 
 export const Resizable: Directive<HTMLElement, ResizableConfig> = {
   beforeMount(el, binding) {

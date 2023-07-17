@@ -2,6 +2,7 @@
   "name": "vue-resizables",
   "type": "module",
   "version": "0.1.5",
+  "packageManager": "pnpm@8.6.7",
   "description": "The resize utilities of Vue.",
   "author": "alexzhang1030",
   "license": "MIT",
@@ -46,7 +47,7 @@
     "vue": "^3.0.0"
   },
   "devDependencies": {
-    "@antfu/eslint-config-ts": "^0.39.7",
+    "@antfu/eslint-config": "^0.39.7",
     "@types/node": "^20.4.2",
     "@vitejs/plugin-vue-jsx": "^3.0.1",
     "@vueuse/core": "^10.2.1",
@@ -65,12 +66,12 @@
     "pre-commit": "pnpm exec lint-staged"
   },
   "lint-staged": {
-    "*.{js,ts,json,md,yaml,yml}": [
+    "*.{js,ts,tsx,vue,json,md,yaml,yml}": [
       "eslint --fix"
     ]
   },
   "eslintConfig": {
-    "extends": "@antfu/eslint-config-ts",
+    "extends": "@antfu",
     "ignorePatterns": [
       "dist",
       "node_modules",

@@ -2,15 +2,15 @@
 </script>
 
 <template>
-  <div class="template" v-resizable="{
-    edge: {
-      bottom: true,
-      right: true,
-    },
-    renderBorder: true
-  }">
-
-  </div>
+  <div
+    v-resizable="{
+      edge: {
+        bottom: true,
+        right: true,
+      },
+      renderBorder: true,
+    }" class="template"
+  />
 </template>
 
 <style>

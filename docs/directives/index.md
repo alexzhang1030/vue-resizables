@@ -13,17 +13,21 @@ Also provide a `component` version: [`Resizable`](/comps/resizable).
 ```vue
 <script setup lang="ts">
 import { vResizable } from 'vue-resizables'
+
 // optional if only need the logic
 import 'vue-resizables/style'
 </script>
+
 <template>
-  <div v-resizable="{
-    edge: {
-      bottom: true,
-      right: true,
-    },
-    renderBorder: true
-  }"></div>
+  <div
+    v-resizable="{
+      edge: {
+        bottom: true,
+        right: true,
+      },
+      border: true,
+    }"
+  />
 </template>
 ```
 
@@ -38,11 +42,11 @@ createApp(App).directive('resizable', vResizable).mount('#app')
 
 ## Config 
 
-| Name          | Type                    | Default              |
-| ------------- | ----------------------- | -------------------- |
-| edge          | `Record<Edge, boolean>` | `Record<Edge, false>` |
-| renderBorder  | `boolean`               | `false`              |
-| throttleTime  | `number`                | 15                   |
+| Name          | Type                       | Default              |
+| ------------- | ---------------------------| -------------------- |
+| edge          | `Record<Edge, boolean>`    | `Record<Edge, false>`|
+| border        | `boolean` or `BorderConfig`| `false`              |
+| throttleTime  | `number`                   | 15                   |
 
 ### `edge`
 
@@ -71,7 +75,7 @@ will enable:
 - `top-left`
 - `right-bottom`
 
-### `renderBorder`
+### `border`
 
 > **required** `import 'vue-resizables/style` to work.
 

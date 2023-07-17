@@ -26,11 +26,11 @@ function checkAbleCursor(
   return [null, null]
 }
 
+const updateWindowCursor = (cursor: string) => window.document.body.style.cursor = cursor
+
 export function useCursors(config: ResizableConfig['edge']) {
   let oldCursor = ''
   const currentCursor = ref(oldCursor)
-
-  const updateWindowCursor = (cursor: string) => window.document.body.style.cursor = cursor
 
   function updateCursor(onlyUpdate: boolean): void
   function updateCursor(result: IsInEdgeResult): [Edge | null, string | null]
@@ -43,7 +43,7 @@ export function useCursors(config: ResizableConfig['edge']) {
       oldCursor = currentCursor.value = getComputedStyle(document.body).getPropertyValue('cursor')
     const [type, cursor] = checkAbleCursor(cursors.find(([edge]) => result[edge]), config)
     currentCursor.value = cursor ?? oldCursor
-    window.document.body.style.cursor = currentCursor.value
+    updateWindowCursor(currentCursor.value)
     return [type, cursor] as const
   }
 

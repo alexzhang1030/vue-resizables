@@ -7,17 +7,22 @@ import { renderBorder } from './border'
 import type { Edge } from '@/utils'
 import { isInEdge } from '@/utils'
 
+export * from './config'
 export type ResizableEl = HTMLElement
 
-export function useResizable(el: ResizableEl, rawConfig: ResizableConfig) {
-  const config = parseConfig(rawConfig)
+function shouldRenderBorder(config: ResizableConfig['border']) {
+  return (typeof config === 'object' && config.render) || config
+}
+
+export function useResizable(el: ResizableEl, resizableConfig: ResizableConfig) {
+  const config = parseConfig(resizableConfig)
 
   const isDragging = ref(false)
   const canDrag = ref(false)
   const moveType = ref<Edge | null>(null)
   const previousPosition = ref({ x: 0, y: 0 })
 
-  if (config.renderBorder)
+  if (shouldRenderBorder(resizableConfig.border))
     renderBorder(el, config.edge, moveType)
 
   const { updateCursor } = useCursors(config.edge)
