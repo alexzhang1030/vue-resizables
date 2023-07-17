@@ -120,7 +120,7 @@ Allowed these syntaxes:
 - `number`: `100`
 - `string`:
   - `'100%'`
-  - `'100vw` / `100vh'`
+  - `'100vw'` / `'100vh'`
 
 ### `size.min.width`
 
