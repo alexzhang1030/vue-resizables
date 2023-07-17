@@ -2,6 +2,8 @@ import type { CSSProperties } from 'vue'
 import type { ResizableBorderConfig, ResizableConfig } from '../config'
 import { BaseEdge, oneOf } from '@/utils'
 
+// @unocss-include
+
 // direction styles
 const ds = {
   // default Theme
@@ -32,10 +34,10 @@ const t = {
 }
 
 const defaultTheme = {
-  [BaseEdge.TOP]: `rounded-5px top-0 left-0 ${ds.dx} ${t.dynf} ${t.dxn}`,
-  [BaseEdge.LEFT]: `rounded-5px top-0 left-0 ${ds.dy} ${t.dyn} ${t.dxnf}`,
-  [BaseEdge.BOTTOM]: `rounded-5px bottom-0 left-0 ${ds.dx} ${t.dypf} ${t.dxn}`,
-  [BaseEdge.RIGHT]: `rounded-5px top-0 right-0 ${ds.dy} ${t.dyn} ${t.dxpf}`,
+  [BaseEdge.TOP]: `top-0 left-0 ${ds.dx} ${t.dynf} ${t.dxn}`,
+  [BaseEdge.LEFT]: `top-0 left-0 ${ds.dy} ${t.dyn} ${t.dxnf}`,
+  [BaseEdge.BOTTOM]: `bottom-0 left-0 ${ds.dx} ${t.dypf} ${t.dxn}`,
+  [BaseEdge.RIGHT]: `top-0 right-0 ${ds.dy} ${t.dyn} ${t.dxpf}`,
 }
 
 const stickyTheme = {
@@ -51,8 +53,8 @@ function getDirection(direction: BaseEdge) {
 
 export function getStyles(config: ResizableConfig['border']) {
   if (!config || typeof config === 'boolean' || !(config.style?.headless))
-    return defaultTheme
-  return stickyTheme
+    return { theme: defaultTheme, append: 'rounded-5px bg-gray-300/50% ' }
+  return { theme: stickyTheme }
 }
 
 export function transpileStyles(config: ResizableBorderConfig['style'], direction: BaseEdge) {

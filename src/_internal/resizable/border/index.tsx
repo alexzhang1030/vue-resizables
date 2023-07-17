@@ -18,11 +18,11 @@ const EdgeTargetEdges = {
 }
 
 function BorderItem({ edge, config }: { edge: BaseEdge; config: ResizableConfig['border'] }) {
-  const baseStyle = getStyles(config)
+  const { theme, append } = getStyles(config)
   const { className, style } = transpileStyles((config as ResizableBorderConfig).style, edge)
   return <div class={[
-    'absolute bg-gray-300/50% animate-fade-in animate-duration-100',
-    baseStyle[edge], className,
+    'absolute animate-fade-in animate-duration-100', append ?? [],
+    theme[edge], className,
   ]} style={style}></div>
 }
 
