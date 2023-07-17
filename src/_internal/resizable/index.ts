@@ -40,11 +40,12 @@ export function useResizable(el: ResizableEl, resizableConfig: ResizableConfig) 
         e,
         type: moveType.value!,
         initialPosition: previousPosition.value,
-        config: config.edge,
+        config,
       })
       previousPosition.value = { x, y }
       return
     }
+    // only check when cursor is around the element
     const { aroundX, aroundY } = isInAround(el, x, y)
     if (aroundX && aroundY) {
       const result = isInEdge(el, x, y)

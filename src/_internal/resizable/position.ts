@@ -1,6 +1,7 @@
-import type { ResizableConfig } from './config'
+import type { ResizableConfig, ResizableConfigResolved, ResizableSizeConfig } from './config'
+import type { ResizableEl } from '.'
 import type { Edge } from '@/utils'
-import { BaseEdge, ExtendedEdge } from '@/utils'
+import { BaseEdge, ExtendedEdge, calculatePixelValue } from '@/utils'
 
 type PosFn = (
   size: { width: number; height: number },
@@ -38,14 +39,31 @@ export function updatePosition({
   e: MouseEvent
   type: Edge
   initialPosition: { x: number; y: number }
-  config: ResizableConfig['edge']
+  config: ResizableConfigResolved
 },
 
 ) {
   const { width, height } = el.getBoundingClientRect()
   const { clientX, clientY } = e
-  const posFns = getPosFns(config)
+  const posFns = getPosFns(config.edge)
   const { width: finalWidth, height: finalHeight } = posFns[type]({ width, height }, { x: clientX, y: clientY }, initialPosition)
-  el.style.width = `${finalWidth}px`
-  el.style.height = `${finalHeight}px`
+
+  const { w, h } = resolveLimit({ width: finalWidth, height: finalHeight, config: config.size, el })
+
+  el.style.width = `${w}px`
+  el.style.height = `${h}px`
+}
+
+export function resolveLimit({ width, height, config, el }: {
+  width: number
+  height: number
+  config: ResizableSizeConfig
+  el: ResizableEl
+}) {
+  const { min, max } = config
+  const [minWidth, minHeight, maxWidth, maxHeight] = [min.width, min.height, max.width, max.height].map(item => calculatePixelValue(item, el))
+  return {
+    w: Math.max(minWidth, Math.min(maxWidth, width)),
+    h: Math.max(minHeight, Math.min(maxHeight, height)),
+  }
 }

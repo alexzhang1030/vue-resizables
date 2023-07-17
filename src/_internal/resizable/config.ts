@@ -1,4 +1,5 @@
-import { BaseEdge, type Edge, ExtendedEdge, notDefined } from '@/utils'
+import type { DeepPartial } from 'unocss'
+import { BaseEdge, type Edge, ExtendedEdge, deepMerge, notDefined } from '@/utils'
 
 export interface ResizableBorderConfig {
   render: boolean
@@ -7,6 +8,17 @@ export interface ResizableBorderConfig {
     color?: string
     class?: string
     size?: number
+  }
+}
+
+export interface ResizableSizeConfig {
+  min: {
+    width: number | string
+    height: number | string
+  }
+  max: {
+    width: number | string
+    height: number | string
   }
 }
 
@@ -23,9 +35,14 @@ export interface ResizableConfig {
    * @default 15
    */
   throttleTime?: number
+  size?: DeepPartial<ResizableSizeConfig>
 }
 
-export const defaultConfig: ResizableConfig = {
+export type ResizableConfigResolved = Omit<Required<ResizableConfig>, 'size'> & {
+  size: ResizableSizeConfig
+}
+
+export const defaultConfig: ResizableConfigResolved = {
   edge: {
     [BaseEdge.LEFT]: false,
     [BaseEdge.TOP]: false,
@@ -38,6 +55,16 @@ export const defaultConfig: ResizableConfig = {
   },
   border: false,
   throttleTime: 15,
+  size: {
+    min: {
+      width: 0,
+      height: 0,
+    },
+    max: {
+      width: '100%',
+      height: '100%',
+    },
+  },
 }
 
 function autoEnableExtendedEdges(edge: Partial<ResizableConfig['edge']>): ResizableConfig['edge'] {
@@ -55,10 +82,10 @@ function autoEnableExtendedEdges(edge: Partial<ResizableConfig['edge']>): Resiza
   }
 }
 
-export function parseConfig(config: Partial<ResizableConfig>): ResizableConfig {
+export function parseConfig(config: ResizableConfig): ResizableConfigResolved {
+  const resolvedConfig = deepMerge(defaultConfig, config)
   return {
-    ...defaultConfig,
-    ...config,
+    ...resolvedConfig,
     edge: autoEnableExtendedEdges(config.edge ?? {}),
-  }
+  } as ResizableConfigResolved
 }
