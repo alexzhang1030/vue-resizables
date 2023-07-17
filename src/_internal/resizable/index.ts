@@ -13,6 +13,8 @@ function shouldRenderBorder(config: ResizableConfig['border']) {
   return (typeof config === 'object' && config.render) || config
 }
 
+const currentActiveEl = ref<ResizableEl | null>(null)
+
 export function useResizable(el: ResizableEl, resizableConfig: ResizableConfig) {
   const config = parseConfig(resizableConfig)
 
@@ -43,18 +45,23 @@ export function useResizable(el: ResizableEl, resizableConfig: ResizableConfig) 
       previousPosition.value = { x, y }
       return
     }
-    window.document.body.style.userSelect = 'auto'
     const { aroundX, aroundY } = isInAround(el, x, y)
-    if (!aroundX || !aroundY) {
-      resetCursor()
-      canDrag.value = false
-      moveType.value = null
-      return
+    if (aroundX && aroundY) {
+      const result = isInEdge(el, x, y)
+      const [type, cursor] = updateCursor(result)
+      canDrag.value = !!cursor
+      moveType.value = type
+      currentActiveEl.value = el
     }
-    const result = isInEdge(el, x, y)
-    const [type, cursor] = updateCursor(result)
-    canDrag.value = !!cursor
-    moveType.value = type
+    else {
+      if (currentActiveEl.value === el) {
+        resetCursor()
+        canDrag.value = false
+        moveType.value = null
+        currentActiveEl.value = null
+        window.document.body.style.userSelect = 'auto'
+      }
+    }
   }, config.throttleTime))
 
   useEventListener(listenEl, 'pointerdown', (e: MouseEvent) => {
