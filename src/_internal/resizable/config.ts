@@ -1,9 +1,13 @@
 import { BaseEdge, type Edge, ExtendedEdge, notDefined } from '@/utils'
 
 export interface ResizableBorderConfig {
-  render: true
-  headless: boolean
-  customClass: string // '$$headless' for headless
+  render: boolean
+  style?: {
+    headless?: boolean
+    color?: string
+    class?: string
+    size?: number
+  }
 }
 
 export interface ResizableConfig {

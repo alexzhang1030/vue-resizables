@@ -1,5 +1,6 @@
 <script setup>
 import Resizable from '../components/directives/Resizable.vue'
+import CustomBorder from '../components/directives/ResizableCustomBorder.vue'
 </script>
 
 # `v-resizable` 
@@ -80,3 +81,7 @@ will enable:
 > **required** `import 'vue-resizables/style` to work.
 
 If `true`, the border of the element will be rendered. 
+
+## Custom border
+
+<CustomBorder />

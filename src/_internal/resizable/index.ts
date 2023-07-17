@@ -23,7 +23,7 @@ export function useResizable(el: ResizableEl, resizableConfig: ResizableConfig) 
   const previousPosition = ref({ x: 0, y: 0 })
 
   if (shouldRenderBorder(resizableConfig.border))
-    renderBorder(el, config.edge, moveType)
+    renderBorder(el, config, moveType)
 
   const { updateCursor } = useCursors(config.edge)
 
@@ -52,6 +52,8 @@ export function useResizable(el: ResizableEl, resizableConfig: ResizableConfig) 
   }, config.throttleTime))
 
   useEventListener('pointerdown', (e) => {
+    if (e.button !== 0) // ignore non-left click down
+      return
     if (!canDrag.value)
       return
     isDragging.value = true
