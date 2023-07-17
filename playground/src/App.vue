@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { vResizable } from 'vue-resizables'
+import 'vue-resizables/style'
 </script>
 
 <template>
@@ -8,9 +10,11 @@
         bottom: true,
         right: true,
       },
-      renderBorder: true,
+      border: true,
     }" class="template"
-  />
+  >
+    <p>hello</p>
+  </div>
 </template>
 
 <style>

@@ -1,6 +1,7 @@
 import type { PropType } from 'vue'
 import { defineComponent, onMounted, ref } from 'vue'
-import { type ResizableConfig, useResizable } from '@/composables'
+import type { ResizableConfig } from '..'
+import { useResizable } from '@/_internal'
 
 export const Resizable = defineComponent({
   name: 'VueResizableComp',

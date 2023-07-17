@@ -7,7 +7,6 @@ import { renderBorder } from './border'
 import type { Edge } from '@/utils'
 import { isInEdge } from '@/utils'
 
-export * from './config'
 export type ResizableEl = HTMLElement
 
 function shouldRenderBorder(config: ResizableConfig['border']) {

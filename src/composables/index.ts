@@ -1,1 +1,1 @@
-export * from '@/_internal'
+export { useResizable } from '@/_internal'
