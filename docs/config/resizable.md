@@ -16,6 +16,16 @@ export const defaultConfig: ResizableConfig = {
   },
   border: false,
   throttleTime: 15,
+  size: {
+    min: {
+      width: 0,
+      height: 0,
+    },
+    max: {
+      width: Number.POSITIVE_INFINITY,
+      height: Number.POSITIVE_INFINITY,
+    },
+  },
 }
 ```
 
