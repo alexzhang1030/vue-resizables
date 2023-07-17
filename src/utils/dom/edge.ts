@@ -18,11 +18,21 @@ const TOLERANCE = 5
 
 export type IsInEdgeResult = Record<Edge, boolean>
 
+export function isInAround(el: HTMLElement, x: number, y: number) {
+  const { left, right, top, bottom } = el.getBoundingClientRect()
+  const aroundY = (y - bottom) < TOLERANCE && (y - top) > -TOLERANCE
+  const aroundX = (x - right) < TOLERANCE && (x - left) > -TOLERANCE
+  return {
+    aroundX,
+    aroundY,
+  }
+}
+
 export function isInEdge(element: HTMLElement, x: number, y: number): IsInEdgeResult {
   const { left, right, top, bottom } = element.getBoundingClientRect()
   const abs = Math.abs
-  const aroundY = (y - bottom) < TOLERANCE && (y - top) > -TOLERANCE
-  const aroundX = (x - right) < TOLERANCE && (x - left) > -TOLERANCE
+
+  const { aroundX, aroundY } = isInAround(element, x, y)
 
   const result = {
     [BaseEdge.LEFT]: (abs(x - left) < TOLERANCE) && aroundY,

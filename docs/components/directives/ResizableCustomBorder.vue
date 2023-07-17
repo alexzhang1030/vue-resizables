@@ -10,6 +10,7 @@ const { width, height } = useElementSize(el)
 
 <template>
   <div
+    id="#ResizableCustomBorder"
     ref="el" v-resizable="{
       edge: {
         bottom: true,

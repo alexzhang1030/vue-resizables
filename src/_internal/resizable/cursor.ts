@@ -49,5 +49,6 @@ export function useCursors(config: ResizableConfig['edge']) {
 
   return {
     updateCursor,
+    resetCursor: () => updateWindowCursor(oldCursor),
   }
 }

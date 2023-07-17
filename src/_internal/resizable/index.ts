@@ -5,7 +5,7 @@ import { type ResizableConfig, parseConfig } from './config'
 import { updatePosition } from './position'
 import { renderBorder } from './border'
 import type { Edge } from '@/utils'
-import { isInEdge } from '@/utils'
+import { isInAround, isInEdge } from '@/utils'
 
 export type ResizableEl = HTMLElement
 
@@ -24,11 +24,12 @@ export function useResizable(el: ResizableEl, resizableConfig: ResizableConfig) 
   if (shouldRenderBorder(resizableConfig.border))
     renderBorder(el, config, moveType)
 
-  const { updateCursor } = useCursors(config.edge)
+  const { updateCursor, resetCursor } = useCursors(config.edge)
 
   const listenEl = window.document.body
 
   useEventListener(listenEl, 'pointermove', useThrottleFn((e: MouseEvent) => {
+    const { clientX: x, clientY: y } = e
     if (isDragging.value) {
       updateCursor(true)
       window.document.body.style.userSelect = 'none'
@@ -39,12 +40,18 @@ export function useResizable(el: ResizableEl, resizableConfig: ResizableConfig) 
         initialPosition: previousPosition.value,
         config: config.edge,
       })
-      previousPosition.value = { x: e.clientX, y: e.clientY }
+      previousPosition.value = { x, y }
       return
     }
     window.document.body.style.userSelect = 'auto'
-    const { clientX, clientY } = e
-    const result = isInEdge(el, clientX, clientY)
+    const { aroundX, aroundY } = isInAround(el, x, y)
+    if (!aroundX || !aroundY) {
+      resetCursor()
+      canDrag.value = false
+      moveType.value = null
+      return
+    }
+    const result = isInEdge(el, x, y)
     const [type, cursor] = updateCursor(result)
     canDrag.value = !!cursor
     moveType.value = type
@@ -56,7 +63,7 @@ export function useResizable(el: ResizableEl, resizableConfig: ResizableConfig) 
     if (!canDrag.value)
       return
     isDragging.value = true
-    previousPosition.value = { x: e.x, y: e.y }
+    previousPosition.value = { x: e.clientX, y: e.clientY }
   })
   useEventListener(listenEl, 'pointerup', () => {
     isDragging.value = false
