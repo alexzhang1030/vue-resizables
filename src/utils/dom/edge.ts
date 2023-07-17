@@ -18,13 +18,28 @@ const THRESHOLD = 5
 
 export type IsInEdgeResult = Record<Edge, boolean>
 
+function isInScope({
+  left, right, bottom, top, x, y,
+}: {
+  left: number
+  top: number
+  right: number
+  bottom: number
+  x: number
+  y: number
+}, direction: 'x' | 'y') {
+  return direction === 'x'
+    ? x >= left && x <= right
+    : y >= top && y <= bottom
+}
+
 export function isInEdge(element: HTMLElement, x: number, y: number): IsInEdgeResult {
   const { left, right, top, bottom } = element.getBoundingClientRect()
   const result = {
-    [BaseEdge.LEFT]: Math.abs(x - left) < THRESHOLD,
-    [BaseEdge.RIGHT]: Math.abs(x - right) < THRESHOLD,
-    [BaseEdge.TOP]: Math.abs(y - top) < THRESHOLD,
-    [BaseEdge.BOTTOM]: Math.abs(y - bottom) < THRESHOLD,
+    [BaseEdge.LEFT]: Math.abs(x - left) < THRESHOLD && isInScope({ left, right, bottom, top, x, y }, 'y'),
+    [BaseEdge.RIGHT]: Math.abs(x - right) < THRESHOLD && isInScope({ left, right, bottom, top, x, y }, 'y'),
+    [BaseEdge.TOP]: Math.abs(y - top) < THRESHOLD && isInScope({ left, right, bottom, top, x, y }, 'x'),
+    [BaseEdge.BOTTOM]: Math.abs(y - bottom) < THRESHOLD && isInScope({ left, right, bottom, top, x, y }, 'x'),
   }
   return {
     ...result,

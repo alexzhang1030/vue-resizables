@@ -32,13 +32,12 @@ const getPosFns: (config: ResizableConfig['edge']) => Record<Edge, PosFn> = conf
 })
 
 export function updatePosition({
-  el, e, type, initialPosition, postUpdate, config,
+  el, e, type, initialPosition, config,
 }: {
   el: HTMLElement
   e: MouseEvent
   type: Edge
   initialPosition: { x: number; y: number }
-  postUpdate: (x: number, y: number) => void
   config: ResizableConfig['edge']
 },
 
@@ -49,5 +48,4 @@ export function updatePosition({
   const { width: finalWidth, height: finalHeight } = posFns[type]({ width, height }, { x, y }, initialPosition)
   el.style.width = `${finalWidth}px`
   el.style.height = `${finalHeight}px`
-  postUpdate(x, y)
 }

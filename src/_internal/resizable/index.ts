@@ -26,7 +26,9 @@ export function useResizable(el: ResizableEl, resizableConfig: ResizableConfig) 
 
   const { updateCursor } = useCursors(config.edge)
 
-  useEventListener('pointermove', useThrottleFn((e: MouseEvent) => {
+  const listenEl = window.document.body
+
+  useEventListener(listenEl, 'pointermove', useThrottleFn((e: MouseEvent) => {
     if (isDragging.value) {
       updateCursor(true)
       window.document.body.style.userSelect = 'none'
@@ -35,11 +37,9 @@ export function useResizable(el: ResizableEl, resizableConfig: ResizableConfig) 
         e,
         type: moveType.value!,
         initialPosition: previousPosition.value,
-        postUpdate: (x, y) => {
-          previousPosition.value = { x, y }
-        },
         config: config.edge,
       })
+      previousPosition.value = { x: e.x, y: e.y }
       return
     }
     window.document.body.style.userSelect = 'auto'
@@ -50,7 +50,7 @@ export function useResizable(el: ResizableEl, resizableConfig: ResizableConfig) 
     moveType.value = type
   }, config.throttleTime))
 
-  useEventListener('pointerdown', (e) => {
+  useEventListener(listenEl, 'pointerdown', (e: MouseEvent) => {
     if (e.button !== 0) // ignore non-left click down
       return
     if (!canDrag.value)
@@ -58,10 +58,10 @@ export function useResizable(el: ResizableEl, resizableConfig: ResizableConfig) 
     isDragging.value = true
     previousPosition.value = { x: e.x, y: e.y }
   })
-  useEventListener('pointerup', () => {
+  useEventListener(listenEl, 'pointerup', () => {
     isDragging.value = false
   })
-  useEventListener('pointerleave', () => {
+  useEventListener(listenEl, 'pointerleave', () => {
     isDragging.value = false
   })
 }
