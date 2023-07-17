@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {  ref } from 'vue'
+import { ref } from 'vue'
 import { vResizable } from '@/directives'
 import { useElementSize } from '@vueuse/core';
 

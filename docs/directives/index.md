@@ -4,6 +4,8 @@ import Resizable from '../components/directives/Resizable.vue'
 
 # `v-resizable` 
 
+Also provide a `component` version: [`Resizable`](/comps/resizable).
+
 ## Preview
 
 <Resizable />

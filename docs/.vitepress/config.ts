@@ -21,6 +21,7 @@ export default defineConfig({
     nav: [
       { text: 'Home', link: '/' },
       { text: 'Directives', link: '/directives/' },
+      { text: 'Components', link: '/comps/' },
     ],
 
     sidebar: [
@@ -34,6 +35,12 @@ export default defineConfig({
         text: 'Directives',
         items: [
           { text: 'vResizable', link: '/directives/' },
+        ],
+      },
+      {
+        text: 'Components',
+        items: [
+          { text: 'Resizable', link: '/comps/resizable' },
         ],
       },
     ],
