@@ -61,8 +61,8 @@ export const defaultConfig: ResizableConfigResolved = {
       height: 0,
     },
     max: {
-      width: '100%',
-      height: '100%',
+      width: Number.POSITIVE_INFINITY,
+      height: Number.POSITIVE_INFINITY,
     },
   },
 }

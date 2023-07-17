@@ -110,3 +110,34 @@ The size(width/height) of the border.
 - Default: `15`
 
 The throttle time of the resize event.
+
+## size
+
+Set the min/max size of the ResizableElement.
+
+Allowed these syntaxes:
+
+- `number`: `100`
+- `string`:
+  - `'100%'`
+  - `'100vw` / `100vh'`
+
+### `size.min.width`
+
+- Type: `number`
+- Default: 0
+
+### `size.min.height`
+
+- Type: `number`
+- Default: 0
+
+### `size.max.width`
+
+- Type: `number`
+- Default: `Number.POSITIVE_INFINITY`
+
+### `size.max.height`
+
+- Type: `number`
+- Default: `Number.POSITIVE_INFINITY`
