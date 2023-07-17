@@ -1,6 +1,6 @@
 import type { PropType, Ref } from 'vue'
 import { computed, defineComponent, render } from 'vue'
-import type { ResizableBorderConfig, ResizableConfig } from '../config'
+import type { ResizableBorderConfig, ResizableConfig, ResizableConfigResolved } from '../config'
 import type { ResizableEl } from '..'
 import { getStyles, transpileStyles } from './style'
 import { BaseEdge, ExtendedEdge, getIntersection, oneOf } from '@/utils'
@@ -30,7 +30,7 @@ const Border = defineComponent({
   name: 'ResizableSign',
   props: {
     config: {
-      type: Object as PropType<ResizableConfig>,
+      type: Object as PropType<ResizableConfigResolved>,
       required: true,
     },
     moveType: {
@@ -61,7 +61,7 @@ const Border = defineComponent({
   },
 })
 
-export function renderBorder(el: ResizableEl, config: ResizableConfig, moveType: Ref<Edge | null>) {
+export function renderBorder(el: ResizableEl, config: ResizableConfigResolved, moveType: Ref<Edge | null>) {
   const position = getComputedStyle(el).position
   if (oneOf(position, ['static', '']))
     el.style.position = 'relative'

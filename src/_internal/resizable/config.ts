@@ -86,6 +86,7 @@ export function parseConfig(config: ResizableConfig): ResizableConfigResolved {
   const resolvedConfig = deepMerge(defaultConfig, config)
   return {
     ...resolvedConfig,
+    border: config.border,
     edge: autoEnableExtendedEdges(config.edge ?? {}),
   } as ResizableConfigResolved
 }
