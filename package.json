@@ -2,7 +2,7 @@
   "name": "vue-resizables",
   "type": "module",
   "version": "0.2.6",
-  "packageManager": "pnpm@8.6.7",
+  "packageManager": "pnpm@8.6.8",
   "description": "The resize utilities of Vue.",
   "author": "alexzhang1030",
   "license": "MIT",
