@@ -1,5 +1,5 @@
-import type { IntrinsicElementAttributes, PropType } from 'vue'
-import { defineComponent, onMounted, ref } from 'vue'
+import type { NativeElements, PropType } from 'vue'
+import { defineComponent, h, onMounted, ref } from 'vue'
 import type { ResizableConfig } from '..'
 import { useResizable } from '@/_internal'
 
@@ -11,7 +11,7 @@ export const Resizable = defineComponent({
       default: () => ({}),
     },
     as: {
-      type: String as PropType<keyof IntrinsicElementAttributes>,
+      type: String as PropType<(keyof NativeElements) | (NonNullable<unknown> & string)>,
       default: 'div',
     },
   },
@@ -24,10 +24,6 @@ export const Resizable = defineComponent({
       useResizable(wrapperRef.value, props.config)
       init = true
     })
-    return () => {
-      return <props.as class="relative" ref={wrapperRef}>
-        {slots.default?.()}
-      </props.as>
-    }
+    return () => h(props.as, { class: 'relative', ref: wrapperRef }, slots.default?.())
   },
 })
