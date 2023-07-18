@@ -21,8 +21,8 @@ export default defineConfig({
     nav: [
       { text: 'Home', link: '/' },
       { text: 'Directives', link: '/directives/' },
-      { text: 'Components', link: '/comps/' },
-      { text: 'Config', link: '/config/' },
+      { text: 'Components', link: '/comps/resizable' },
+      { text: 'Config', link: '/config/resizable' },
     ],
 
     sidebar: [
