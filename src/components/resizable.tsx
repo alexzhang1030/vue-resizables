@@ -1,5 +1,5 @@
-import type { PropType } from 'vue'
-import { defineComponent, onMounted, ref } from 'vue'
+import type { NativeElements, PropType } from 'vue'
+import { defineComponent, h, onMounted, ref } from 'vue'
 import type { ResizableConfig } from '..'
 import { useResizable } from '@/_internal'
 
@@ -9,6 +9,10 @@ export const Resizable = defineComponent({
     config: {
       type: Object as PropType<ResizableConfig>,
       default: () => ({}),
+    },
+    as: {
+      type: String as PropType<(keyof NativeElements) | (NonNullable<unknown> & string)>,
+      default: 'div',
     },
   },
   setup(props, { slots }) {
@@ -20,10 +24,6 @@ export const Resizable = defineComponent({
       useResizable(wrapperRef.value, props.config)
       init = true
     })
-    return () => {
-      return <div class="relative" ref={wrapperRef}>
-        {slots.default?.()}
-      </div>
-    }
+    return () => h(props.as, { class: 'relative', ref: wrapperRef }, slots.default?.())
   },
 })
