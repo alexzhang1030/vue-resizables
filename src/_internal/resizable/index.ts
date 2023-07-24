@@ -2,10 +2,12 @@ import { ref } from 'vue'
 import { useEventListener, useThrottleFn } from '@vueuse/core'
 import { useCursors } from './cursor'
 import { type ResizableConfig, parseConfig } from './config'
-import { updatePosition } from './position'
+import { updateSize } from './size'
 import { renderBorder } from './border'
 import type { Edge } from '@/utils'
 import { isInAround, isInEdge } from '@/utils'
+
+export interface Position { x: number; y: number }
 
 export type ResizableEl = HTMLElement
 
@@ -21,7 +23,8 @@ export function useResizable(el: ResizableEl, resizableConfig: ResizableConfig) 
   const isDragging = ref(false)
   const canDrag = ref(false)
   const moveType = ref<Edge | null>(null)
-  const previousPosition = ref({ x: 0, y: 0 })
+  const previousPosition = ref<Position>({ x: 0, y: 0 })
+  const deltaPosition = ref<Position>({ x: 0, y: 0 })
 
   if (shouldRenderBorder(resizableConfig.border))
     renderBorder(el, config, moveType)
@@ -35,11 +38,11 @@ export function useResizable(el: ResizableEl, resizableConfig: ResizableConfig) 
     if (isDragging.value) {
       updateCursor(true)
       window.document.body.style.userSelect = 'none'
-      updatePosition({
+      deltaPosition.value = { x: x - previousPosition.value.x, y: y - previousPosition.value.y }
+      updateSize({
         el,
-        e,
+        deltaPosition: deltaPosition.value,
         type: moveType.value!,
-        initialPosition: previousPosition.value,
         config,
       })
       previousPosition.value = { x, y }
