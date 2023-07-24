@@ -1,11 +1,14 @@
 import { ref } from 'vue'
 import { useEventListener, useThrottleFn } from '@vueuse/core'
 import { useCursors } from './cursor'
-import { type ResizableConfig, parseConfig } from './config'
-import { updatePosition } from './position'
+import { parseConfig } from './config'
+import type { ResizableConfig, ResizableConfigResolved } from './config'
 import { renderBorder } from './border'
+import { updateSize } from './size'
 import type { Edge } from '@/utils'
 import { isInAround, isInEdge } from '@/utils'
+
+export interface Position { x: number; y: number }
 
 export type ResizableEl = HTMLElement
 
@@ -13,18 +16,49 @@ function shouldRenderBorder(config: ResizableConfig['border']) {
   return (typeof config === 'object' && config.render) || config
 }
 
-const currentActiveEl = ref<ResizableEl | null>(null)
-
 export function useResizable(el: ResizableEl, resizableConfig: ResizableConfig) {
   const config = parseConfig(resizableConfig)
+
+  const { moveType, deltaPosition } = registerPointerEvents(el, config, {
+    handlePointerMove: () => updateSize({
+      el,
+      deltaPosition: deltaPosition.value,
+      type: moveType.value!,
+      config,
+    }),
+  })
+
+  if (shouldRenderBorder(resizableConfig.border))
+    renderBorder(el, config, moveType)
+}
+
+const currentActiveEl = ref<ResizableEl | null>(null)
+
+interface PointerEventHandlers {
+  handlePointerMove?: (e: MouseEvent) => void
+  handlePointerDown?: (e: MouseEvent) => void
+  handlePointerUp?: (e: MouseEvent) => void
+  handlePointerLeave?: (e: MouseEvent) => void
+}
+
+export function registerPointerEvents(el: HTMLElement, config: ResizableConfigResolved, handlers?: PointerEventHandlers) {
+  const {
+    handlePointerMove,
+    handlePointerDown,
+    handlePointerUp,
+    handlePointerLeave,
+  } = handlers ?? {
+    handlePointerDown: undefined,
+    handlePointerLeave: undefined,
+    handlePointerMove: undefined,
+    handlePointerUp: undefined,
+  }
 
   const isDragging = ref(false)
   const canDrag = ref(false)
   const moveType = ref<Edge | null>(null)
-  const previousPosition = ref({ x: 0, y: 0 })
-
-  if (shouldRenderBorder(resizableConfig.border))
-    renderBorder(el, config, moveType)
+  const previousPosition = ref<Position>({ x: 0, y: 0 })
+  const deltaPosition = ref<Position>({ x: 0, y: 0 })
 
   const { updateCursor, resetCursor } = useCursors(config.edge)
 
@@ -32,19 +66,16 @@ export function useResizable(el: ResizableEl, resizableConfig: ResizableConfig) 
 
   useEventListener(listenEl, 'pointermove', useThrottleFn((e: MouseEvent) => {
     const { clientX: x, clientY: y } = e
+
     if (isDragging.value) {
       updateCursor(true)
       window.document.body.style.userSelect = 'none'
-      updatePosition({
-        el,
-        e,
-        type: moveType.value!,
-        initialPosition: previousPosition.value,
-        config,
-      })
+      deltaPosition.value = { x: x - previousPosition.value.x, y: y - previousPosition.value.y }
       previousPosition.value = { x, y }
+      handlePointerMove?.(e)
       return
     }
+
     // only check when cursor is around the element
     const { aroundX, aroundY } = isInAround(el, x, y)
     if (aroundX && aroundY) {
@@ -72,11 +103,24 @@ export function useResizable(el: ResizableEl, resizableConfig: ResizableConfig) 
       return
     isDragging.value = true
     previousPosition.value = { x: e.clientX, y: e.clientY }
+    handlePointerDown?.(e)
   })
-  useEventListener(listenEl, 'pointerup', () => {
+
+  useEventListener(listenEl, 'pointerup', (e: MouseEvent) => {
     isDragging.value = false
+    handlePointerUp?.(e)
   })
-  useEventListener(listenEl, 'pointerleave', () => {
+
+  useEventListener(listenEl, 'pointerleave', (e: MouseEvent) => {
     isDragging.value = false
+    handlePointerLeave?.(e)
   })
+
+  return {
+    isDragging,
+    canDrag,
+    moveType,
+    deltaPosition,
+    previousPosition,
+  }
 }
