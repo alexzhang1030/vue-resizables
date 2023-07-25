@@ -1,10 +1,17 @@
 import type { PropType, Ref } from 'vue'
 import { computed, defineComponent, render } from 'vue'
-import type { ResizableBorderConfig, ResizableConfig, ResizableConfigResolved } from '../config'
-import type { ResizableEl } from '..'
 import { getStyles, transpileStyles } from './style'
-import { BaseEdge, ExtendedEdge, getIntersection, oneOf } from '@/utils'
-import type { Edge } from '@/utils'
+import { BaseEdge, ExtendedEdge } from '@/types'
+import type { Edge, ResizableBorderConfig, ResizableConfig, ResizableConfigResolved, ResizableEl } from '@/types'
+import { getIntersection, oneOf } from '@/utils'
+
+export const defaultBorderConfig: ResizableBorderConfig = {
+  render: true,
+  style: {
+    headless: false,
+    size: 5,
+  },
+}
 
 const EdgeTargetEdges = {
   [BaseEdge.TOP]: [BaseEdge.TOP],

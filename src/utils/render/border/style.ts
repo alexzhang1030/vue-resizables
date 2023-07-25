@@ -1,6 +1,7 @@
 import type { CSSProperties } from 'vue'
-import type { ResizableBorderConfig, ResizableConfig } from '../config'
-import { BaseEdge, oneOf } from '@/utils'
+import type { ResizableBorderConfig, ResizableConfig } from '@/types'
+import { BaseEdge } from '@/types'
+import { oneOf } from '@/utils/common'
 
 // @unocss-include
 
