@@ -1,6 +1,10 @@
 import 'uno.css'
 
-export * from './directives'
-export * from './composables'
-export * from './components'
+// directives
+export { vResizable } from './directives'
+// composables
+export { useResizable } from './composables'
+// components
+export { Resizable } from './components'
+// types
 export * from './types'

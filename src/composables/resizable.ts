@@ -1,16 +1,9 @@
-import { ref } from 'vue'
+import type { Position } from '@vueuse/core'
 import { useEventListener, useThrottleFn } from '@vueuse/core'
+import { ref } from 'vue'
 import { useCursors } from './cursor'
-import { parseConfig } from './config'
-import type { ResizableConfig, ResizableConfigResolved } from './config'
-import { renderBorder } from './border'
-import { updateSize } from './size'
-import type { Edge } from '@/utils'
-import { isInAround, isInEdge } from '@/utils'
-
-export interface Position { x: number; y: number }
-
-export type ResizableEl = HTMLElement
+import type { Edge, ResizableConfig, ResizableConfigResolved, ResizableEl } from '@/types'
+import { isInAround, isInEdge, parseConfig, renderBorder, updateSize } from '@/utils'
 
 function shouldRenderBorder(config: ResizableConfig['border']) {
   return (typeof config === 'object' && config.render) || config
