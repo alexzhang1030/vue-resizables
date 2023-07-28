@@ -34,7 +34,7 @@ interface PointerEventHandlers {
   handlePointerLeave?: (e: MouseEvent) => void
 }
 
-export function registerPointerEvents(el: HTMLElement, config: ResizableConfigResolved, handlers?: PointerEventHandlers) {
+export function registerPointerEvents(el: HTMLElement, config: ResizableConfigResolved, handlers?: PointerEventHandlers, isIgnoreEdgeCheck = false) {
   const {
     handlePointerMove,
     handlePointerDown,
@@ -72,10 +72,17 @@ export function registerPointerEvents(el: HTMLElement, config: ResizableConfigRe
     // only check when cursor is around the element
     const { aroundX, aroundY } = isInAround(el, x, y)
     if (aroundX && aroundY) {
-      const result = isInEdge(el, x, y)
-      const [type, cursor] = updateCursor(result)
-      canDrag.value = !!cursor
-      moveType.value = type
+      if (!isIgnoreEdgeCheck) {
+        const result = isInEdge(el, x, y)
+        const [type, cursor] = updateCursor(result)
+        canDrag.value = !!cursor
+        moveType.value = type
+      }
+      else {
+        updateCursor(true)
+        canDrag.value = true
+      }
+
       currentActiveEl.value = el
     }
     else {

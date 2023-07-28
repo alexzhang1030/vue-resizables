@@ -5,6 +5,6 @@ export { vResizable } from './directives'
 // composables
 export { useResizable } from './composables'
 // components
-export { Resizable } from './components'
+export { Resizable, Panel, PanelHandle, PanelGroup } from './components'
 // types
 export * from './types'

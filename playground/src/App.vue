@@ -1,51 +1,21 @@
 <script setup lang="ts">
-import { vResizable } from 'vue-resizables'
-import 'vue-resizables/style'
+import { Panel, PanelGroup, PanelHandle } from 'vue-resizables'
 </script>
 
 <template>
-  <div class="w-100vw h-100vh flex justify-center items-center flex-wrap gap-50px">
-    <div
-      v-resizable="{
-        edge: {
-          bottom: true,
-          right: true,
-          left: true,
-          top: true,
-        },
-        border: {
-          render: true,
-          style: {
-            headless: true,
-            size: 2,
-            color: 'red',
-          },
-        },
-      }"
-      class="w-300px h-300px bg-lightblue-1"
-    >
-      <p>hello</p>
-    </div>
-    <div
-      v-resizable="{
-        edge: {
-          bottom: true,
-          right: true,
-          left: true,
-          top: true,
-        },
-        border: {
-          render: true,
-          style: {
-            headless: true,
-            size: 2,
-            color: 'red',
-          },
-        },
-      }"
-      class="w-300px h-300px bg-yellow-2"
-    >
-      22222222
-    </div>
+  <div class="w-100vw h-100vh flex">
+    <PanelGroup class="w-100vw h-100vh" direction="vertical">
+      <Panel bg-red>
+        prev
+      </Panel>
+      <PanelHandle />
+      <Panel bg-blue>
+        next
+      </Panel>
+      <PanelHandle />
+      <Panel bg-pink>
+        1234
+      </Panel>
+    </PanelGroup>
   </div>
 </template>
