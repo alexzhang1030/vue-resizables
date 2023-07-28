@@ -11,6 +11,9 @@ importers:
       '@antfu/eslint-config':
         specifier: ^0.39.8
         version: 0.39.8(eslint@8.45.0)(typescript@5.1.6)
+      '@iconify-json/carbon':
+        specifier: ^1.1.18
+        version: 1.1.18
       '@types/node':
         specifier: ^20.4.4
         version: 20.4.4
@@ -37,7 +40,7 @@ importers:
         version: 5.1.6
       unocss:
         specifier: ^0.53.6
-        version: 0.53.6(postcss@8.4.25)(vite@4.4.6)
+        version: 0.53.6(postcss@8.4.27)(vite@4.4.6)
       vite:
         specifier: ^4.4.6
         version: 4.4.6(@types/node@20.4.4)
@@ -909,6 +912,12 @@ packages:
     resolution: {integrity: sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==}
     dev: true
 
+  /@iconify-json/carbon@1.1.18:
+    resolution: {integrity: sha512-RbKET6KS9xUMeYVq1FUH3UUA7AYNcnApkHt2AccCwTWTQQs/O58ji4Of6z6PhRajGlbfvrJzT/Uqh19OKECRvA==}
+    dependencies:
+      '@iconify/types': 2.0.0
+    dev: true
+
   /@iconify/types@2.0.0:
     resolution: {integrity: sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==}
     dev: true
@@ -1377,7 +1386,7 @@ packages:
       sirv: 2.0.3
     dev: true
 
-  /@unocss/postcss@0.53.6(postcss@8.4.25):
+  /@unocss/postcss@0.53.6(postcss@8.4.27):
     resolution: {integrity: sha512-/Xi1f32uWgvlGqW7YejV5gJQYOFKKHU3TxQSrqUHVtHmtG5ZS8Ow6ZIumcReWnazpI/grq0H0O/ZPrXsUvPcpg==}
     engines: {node: '>=14'}
     peerDependencies:
@@ -1388,7 +1397,7 @@ packages:
       css-tree: 2.3.1
       fast-glob: 3.3.0
       magic-string: 0.30.1
-      postcss: 8.4.25
+      postcss: 8.4.27
     dev: true
 
   /@unocss/preset-attributify@0.53.6:
@@ -4313,7 +4322,7 @@ packages:
     engines: {node: '>= 4.0.0'}
     dev: true
 
-  /unocss@0.53.6(postcss@8.4.25)(vite@4.4.6):
+  /unocss@0.53.6(postcss@8.4.27)(vite@4.4.6):
     resolution: {integrity: sha512-yZeSaa3ulfDyU7WaOeN5AZN/ciopY+f9GPuME4hgzxZmUnCSJmuwBW+5UHud2BSRKdem+mLIpBzNXTOsDP8gFA==}
     engines: {node: '>=14'}
     peerDependencies:
@@ -4326,7 +4335,7 @@ packages:
       '@unocss/cli': 0.53.6
       '@unocss/core': 0.53.6
       '@unocss/extractor-arbitrary-variants': 0.53.6
-      '@unocss/postcss': 0.53.6(postcss@8.4.25)
+      '@unocss/postcss': 0.53.6(postcss@8.4.27)
       '@unocss/preset-attributify': 0.53.6
       '@unocss/preset-icons': 0.53.6
       '@unocss/preset-mini': 0.53.6
