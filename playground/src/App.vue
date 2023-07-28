@@ -4,7 +4,7 @@ import { Panel, PanelGroup, PanelHandle } from 'vue-resizables'
 
 <template>
   <div class="w-100vw h-100vh flex">
-    <PanelGroup class="w-100vw h-100vh" direction="horizontal">
+    <PanelGroup class="w-100vw h-100vh" direction="vertical">
       <Panel bg-red>
         prev
       </Panel>

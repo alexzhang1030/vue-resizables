@@ -57,13 +57,13 @@ export const PanelGroup = defineComponent({
                   updateSize({
                     el: prev.el as HTMLElement,
                     deltaPosition: deltaPosition.value,
-                    type: BaseEdge.RIGHT,
+                    type: isHorizontal.value ? BaseEdge.RIGHT : BaseEdge.BOTTOM,
                     config,
                   })
                   updateSize({
                     el: next.el as HTMLElement,
                     deltaPosition: { x: deltaPosition.value.x * -1, y: deltaPosition.value.y * -1 },
-                    type: BaseEdge.LEFT,
+                    type: isHorizontal.value ? BaseEdge.LEFT : BaseEdge.TOP,
                     config,
                   })
                 },
