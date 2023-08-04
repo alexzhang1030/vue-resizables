@@ -24,7 +24,7 @@ import 'vue-resizables/style'
     v-resizable="{
       edge: {
         bottom: true,
-        right: true,
+        left: true,
       },
       border: true,
     }"

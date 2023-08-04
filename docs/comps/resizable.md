@@ -29,7 +29,7 @@ import { Resizable } from 'vue-resizables'
   <Resizable
     class="w-300px h-300px" :config="{
       edge: {
-        right: true,
+        let: true,
         bottom: true,
       },
       border: true,

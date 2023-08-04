@@ -3,10 +3,13 @@ import type { Edge, ResizableConfigResolved, ResizableEl, ResizableSizeConfig } 
 import { BaseEdge, ExtendedEdge } from '@/types'
 
 export function calcSize(deltaPosition: Position, el: HTMLElement, type: Edge) {
-  const { x, y } = deltaPosition
+  let { x, y } = deltaPosition
   const { width: elWidth, height: elHeight } = el.getBoundingClientRect()
 
   const result = { width: elWidth, height: elHeight }
+
+  x = Math.abs(x)
+  y = Math.abs(y)
 
   switch (type) {
     case BaseEdge.LEFT:
