@@ -58,6 +58,7 @@ export function registerPointerEvents(el: HTMLElement, config: ResizableConfigRe
   const listenEl = window.document.body
 
   useEventListener(listenEl, 'pointermove', useThrottleFn((e: MouseEvent) => {
+    e.stopPropagation()
     const { clientX: x, clientY: y } = e
 
     if (isDragging.value) {
