@@ -2,36 +2,26 @@ import type { Position } from '@vueuse/core'
 import type { Edge, ResizableConfigResolved, ResizableEl, ResizableSizeConfig } from '@/types'
 import { BaseEdge, ExtendedEdge } from '@/types'
 
+type SizeMappingFn = (p1: { width: number; height: number }, p2: { x: number; y: number }) => { width: number; height: number }
+
+const sizeMapping: Record<Edge, SizeMappingFn> = {
+  [BaseEdge.LEFT]: ({ width, height }, { x }) => ({ width: width + -x, height }),
+  [BaseEdge.TOP]: ({ width, height }, { y }) => ({ width, height: height + -y }),
+  [BaseEdge.RIGHT]: ({ width, height }, { x }) => ({ width: width + x, height }),
+  [BaseEdge.BOTTOM]: ({ width, height }, { y }) => ({ width, height: height + y }),
+  [ExtendedEdge.TOP_LEFT]: ({ width, height }, { x, y }) => ({ width: width + -x, height: height + -y }),
+  [ExtendedEdge.TOP_RIGHT]: ({ width, height }, { x, y }) => ({ width: width + x, height: height + -y }),
+  [ExtendedEdge.BOTTOM_LEFT]: ({ width, height }, { x, y }) => ({ width: width + -x, height: height + y }),
+  [ExtendedEdge.BOTTOM_RIGHT]: ({ width, height }, { x, y }) => ({ width: width + x, height: height + y }),
+}
+
 export function calcSize(deltaPosition: Position, el: HTMLElement, type: Edge) {
-  let { x, y } = deltaPosition
+  const { x, y } = deltaPosition
   const { width: elWidth, height: elHeight } = el.getBoundingClientRect()
 
   const result = { width: elWidth, height: elHeight }
 
-  x = Math.abs(x)
-  y = Math.abs(y)
-
-  switch (type) {
-    case BaseEdge.LEFT:
-    case BaseEdge.RIGHT:
-      result.width += x
-      break
-    case BaseEdge.TOP:
-    case BaseEdge.BOTTOM:
-      result.height += y
-      break
-    case ExtendedEdge.TOP_LEFT:
-    case ExtendedEdge.TOP_RIGHT:
-    case ExtendedEdge.BOTTOM_LEFT:
-    case ExtendedEdge.BOTTOM_RIGHT:
-      result.width += x
-      result.height += y
-      break
-    default:
-      break
-  }
-
-  return result
+  return sizeMapping[type](result, { x, y })
 }
 
 export function updateSize({
