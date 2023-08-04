@@ -15,6 +15,7 @@ export const defaultConfig: ResizableConfigResolved = {
   },
   border: false,
   throttleTime: 15,
+  tolerance: 5,
   size: {
     min: {
       width: 0,

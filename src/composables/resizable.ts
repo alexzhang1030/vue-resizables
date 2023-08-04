@@ -70,10 +70,10 @@ export function registerPointerEvents(el: HTMLElement, config: ResizableConfigRe
     }
 
     // only check when cursor is around the element
-    const { aroundX, aroundY } = isInAround(el, x, y)
+    const { aroundX, aroundY } = isInAround(el, x, y, config.tolerance)
     if (aroundX && aroundY) {
       if (!isIgnoreEdgeCheck) {
-        const result = isInEdge(el, x, y)
+        const result = isInEdge(el, x, y, config.tolerance)
         const [type, cursor] = updateCursor(result)
         canDrag.value = !!cursor
         moveType.value = type

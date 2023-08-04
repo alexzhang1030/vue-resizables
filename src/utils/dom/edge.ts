@@ -1,29 +1,27 @@
 import type { IsInEdgeResult } from '@/types'
 import { BaseEdge, ExtendedEdge } from '@/types'
 
-const TOLERANCE = 5
-
-export function isInAround(el: HTMLElement, x: number, y: number) {
+export function isInAround(el: HTMLElement, x: number, y: number, tolerance: number) {
   const { left, right, top, bottom } = el.getBoundingClientRect()
-  const aroundY = (y - bottom) < TOLERANCE && (y - top) > -TOLERANCE
-  const aroundX = (x - right) < TOLERANCE && (x - left) > -TOLERANCE
+  const aroundY = (y - bottom) < tolerance && (y - top) > -tolerance
+  const aroundX = (x - right) < tolerance && (x - left) > -tolerance
   return {
     aroundX,
     aroundY,
   }
 }
 
-export function isInEdge(element: HTMLElement, x: number, y: number): IsInEdgeResult {
+export function isInEdge(element: HTMLElement, x: number, y: number, tolerance: number): IsInEdgeResult {
   const { left, right, top, bottom } = element.getBoundingClientRect()
   const abs = Math.abs
 
-  const { aroundX, aroundY } = isInAround(element, x, y)
+  const { aroundX, aroundY } = isInAround(element, x, y, tolerance)
 
   const result = {
-    [BaseEdge.LEFT]: (abs(x - left) < TOLERANCE) && aroundY,
-    [BaseEdge.RIGHT]: (abs(x - right) < TOLERANCE) && aroundY,
-    [BaseEdge.TOP]: (abs(y - top) < TOLERANCE) && aroundX,
-    [BaseEdge.BOTTOM]: (abs(y - bottom) < TOLERANCE) && aroundX,
+    [BaseEdge.LEFT]: (abs(x - left) < tolerance) && aroundY,
+    [BaseEdge.RIGHT]: (abs(x - right) < tolerance) && aroundY,
+    [BaseEdge.TOP]: (abs(y - top) < tolerance) && aroundX,
+    [BaseEdge.BOTTOM]: (abs(y - bottom) < tolerance) && aroundX,
   }
   return {
     ...result,

@@ -35,9 +35,14 @@ export interface ResizableConfig {
    * @default 15
    */
   throttleTime?: number
+  /**
+   * @default 5
+   */
+  tolerance?: number
   size?: DeepPartial<ResizableSizeConfig>
 }
 
-export type ResizableConfigResolved = Omit<Required<ResizableConfig>, 'size'> & {
+export type ResizableConfigResolved = Omit<Required<ResizableConfig>, 'size' | 'tolerance'> & {
   size: ResizableSizeConfig
+  tolerance: number
 }
