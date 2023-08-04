@@ -70,7 +70,7 @@ const Border = defineComponent({
 
 export function renderBorder(el: ResizableEl, config: ResizableConfigResolved, moveType: Ref<Edge | null>) {
   const position = getComputedStyle(el).position
-  if (oneOf(position, ['static', '']))
+  if (oneOf(position, ['static', '']) && (typeof config.border === 'object' && config.border.forceChangePositionValue))
     el.style.position = 'relative'
   render(<Border {...{ config, moveType }} />, el)
 }

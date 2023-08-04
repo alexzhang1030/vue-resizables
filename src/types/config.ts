@@ -9,6 +9,7 @@ export interface ResizableBorderConfig {
     class?: string
     size?: number
   }
+  forceChangePositionValue?: boolean
 }
 
 export interface ResizableSizeConfig {
