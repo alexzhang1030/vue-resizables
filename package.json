@@ -47,20 +47,20 @@
     "vue": "^3.0.0"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^0.42.0",
+    "@antfu/eslint-config": "^0.43.1",
     "@iconify-json/carbon": "^1.1.21",
-    "@types/node": "^20.6.2",
+    "@types/node": "^20.6.5",
     "@vitejs/plugin-vue-jsx": "^3.0.2",
     "@vueuse/core": "^10.4.1",
     "bumpp": "^9.2.0",
-    "eslint": "^8.49.0",
+    "eslint": "^8.50.0",
     "lint-staged": "^14.0.1",
     "simple-git-hooks": "^2.9.0",
     "typescript": "^5.2.2",
-    "unocss": "^0.55.7",
+    "unocss": "^0.56.1",
     "vite": "^4.4.9",
-    "vite-plugin-dts": "^3.5.3",
-    "vitepress": "1.0.0-rc.14",
+    "vite-plugin-dts": "^3.5.4",
+    "vitepress": "1.0.0-rc.20",
     "vue": "^3.3.4"
   },
   "simple-git-hooks": {
