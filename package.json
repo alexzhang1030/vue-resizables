@@ -54,7 +54,7 @@
     "@vueuse/core": "^10.5.0",
     "bumpp": "^9.2.0",
     "eslint": "^8.51.0",
-    "lint-staged": "^14.0.1",
+    "lint-staged": "^15.0.1",
     "simple-git-hooks": "^2.9.0",
     "typescript": "^5.2.2",
     "unocss": "^0.56.5",
