@@ -1,5 +1,6 @@
 {
   "extends": [
     "github>alexzhang-dev/renovate-config"
-  ]
+  ],
+  "ignoreDeps": ["@antfu/eslint-config"]
 }
