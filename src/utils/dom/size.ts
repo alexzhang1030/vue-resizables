@@ -37,8 +37,12 @@ export function updateSize({
   const { width, height } = calcSize(deltaPosition, el, type)
   const { w, h } = resolveLimit({ width, height, config: config.size, el })
 
-  el.style.width = `${w}px`
-  el.style.height = `${h}px`
+  const scaledW = w / config.scale
+  const scaledH = h / config.scale
+  el.style.width = `${scaledW}px`
+  el.style.height = `${scaledH}px`
+
+  return { w: scaledW, h: scaledH }
 }
 
 export function resolveLimit({ width, height, config, el }: {

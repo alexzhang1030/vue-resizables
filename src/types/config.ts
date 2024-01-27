@@ -41,6 +41,7 @@ export interface ResizableConfig {
    */
   tolerance?: number
   size?: DeepPartial<ResizableSizeConfig>
+  scale?: number
 }
 
 export type ResizableConfigResolved = Omit<Required<ResizableConfig>, 'size' | 'tolerance'> & {

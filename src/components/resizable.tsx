@@ -1,5 +1,5 @@
 import type { NativeElements, PropType } from 'vue'
-import { defineComponent, h, onMounted, ref } from 'vue'
+import { defineComponent, h, ref, toRef } from 'vue'
 import { useResizable } from '@/composables'
 import type { ResizableConfig } from '@/types'
 
@@ -17,13 +17,9 @@ export const Resizable = defineComponent({
   },
   setup(props, { slots }) {
     const wrapperRef = ref<HTMLElement | null>(null)
-    let init = false
-    onMounted(() => {
-      if (!wrapperRef.value || init)
-        return
-      useResizable(wrapperRef.value, props.config)
-      init = true
-    })
-    return () => h(props.as, { class: 'relative', ref: wrapperRef }, slots.default?.())
+
+    const result = useResizable(wrapperRef, toRef(props, 'config'))
+
+    return () => h(props.as, { class: 'relative', ref: wrapperRef }, slots.default?.({ result }))
   },
 })
