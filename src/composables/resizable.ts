@@ -136,6 +136,8 @@ export function registerPointerEvents(el: MaybeElementRef<HTMLElement | null>, c
       isDragging.value = false
       handlePointerLeave?.(e)
     })
+  }, {
+    immediate: true,
   })
 
   return {
