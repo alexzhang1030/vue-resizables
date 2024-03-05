@@ -15,7 +15,7 @@ export function useResizable(el: MaybeElementRef<ResizableEl | null>, resizableC
     return parseConfig(toValue(resizableConfig))
   })
 
-  const size = ref<ReturnType<typeof updateSize> | object>({})
+  const size = ref({} as ReturnType<typeof updateSize>)
 
   const payload = registerPointerEvents(el, toValue(config), {
     handlePointerMove: () => {
@@ -29,6 +29,13 @@ export function useResizable(el: MaybeElementRef<ResizableEl | null>, resizableC
         config: config.value,
       })
     },
+  })
+
+  watch(() => size.value, (newSize) => {
+    config.value.onSizeChange?.({
+      width: newSize.w,
+      height: newSize.h,
+    })
   })
 
   watch(() => toValue(el), (element) => {

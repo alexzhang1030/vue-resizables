@@ -151,3 +151,17 @@ Allowed these syntaxes:
 
 - Type: `number`
 - Default: `Number.POSITIVE_INFINITY`
+
+## scale
+
+- Type: `number`
+- Default: `undefined`
+
+The scale of the ResizableElement.
+
+## onSizeChange
+
+- Type: `(size: { width: number, height: number }) => void`
+- Default: `undefined`
+
+The callback function when the size of the ResizableElement changes.
