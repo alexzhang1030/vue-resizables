@@ -24,13 +24,21 @@ const EdgeTargetEdges = {
   [ExtendedEdge.BOTTOM_RIGHT]: [BaseEdge.BOTTOM, BaseEdge.RIGHT],
 }
 
-function BorderItem({ edge, config }: { edge: BaseEdge; config: ResizableConfig['border'] }) {
+function BorderItem({ edge, config }: { edge: BaseEdge, config: ResizableConfig['border'] }) {
   const { theme, append } = getStyles(config)
   const { className, style } = transpileStyles((config as ResizableBorderConfig).style, edge)
-  return <div class={[
-    'absolute animate-fade-in animate-duration-100', append ?? [],
-    theme[edge], className,
-  ]} style={style}></div>
+  return (
+    <div
+      class={[
+        'absolute animate-fade-in animate-duration-100',
+        append ?? [],
+        theme[edge],
+        className,
+      ]}
+      style={style}
+    >
+    </div>
+  )
 }
 
 const Border = defineComponent({
@@ -57,13 +65,14 @@ const Border = defineComponent({
       return getIntersection(allValidEdges.value, EdgeTargetEdges[moveType])
     })
 
-    return () => (<>
-      {
+    return () => (
+      <>
+        {
         renderList.value.map(edge => (
           <BorderItem edge={edge} key={edge} config={props.config.border} />
         ))
       }
-    </>
+      </>
     )
   },
 })

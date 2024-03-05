@@ -68,7 +68,8 @@ export const PanelGroup = defineComponent({
                   })
                 },
               },
-              true)
+              true,
+            )
             i += 2
           }
           else {

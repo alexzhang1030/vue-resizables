@@ -3,7 +3,7 @@ import Resizable from '../components/directives/Resizable.vue'
 import CustomBorder from '../components/directives/ResizableCustomBorder.vue'
 </script>
 
-# `v-resizable` 
+# `v-resizable`
 
 Also provide a `component` version: [`Resizable`](/comps/resizable).
 
@@ -41,7 +41,7 @@ import 'vue-resizables/style'
 createApp(App).directive('resizable', vResizable).mount('#app')
 ```
 
-## Config 
+## Config
 
 See [config](/config/resizable) for more details.
 ## Custom border

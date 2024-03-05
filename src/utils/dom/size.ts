@@ -2,7 +2,7 @@ import type { Position } from '@vueuse/core'
 import type { Edge, ResizableConfigResolved, ResizableEl, ResizableSizeConfig } from '@/types'
 import { BaseEdge, ExtendedEdge } from '@/types'
 
-type SizeMappingFn = (p1: { width: number; height: number }, p2: { x: number; y: number }) => { width: number; height: number }
+type SizeMappingFn = (p1: { width: number, height: number }, p2: { x: number, y: number }) => { width: number, height: number }
 
 const sizeMapping: Record<Edge, SizeMappingFn> = {
   [BaseEdge.LEFT]: ({ width, height }, { x }) => ({ width: width + -x, height }),
@@ -25,7 +25,10 @@ export function calcSize(deltaPosition: Position, el: HTMLElement, type: Edge) {
 }
 
 export function updateSize({
-  el, deltaPosition, type, config,
+  el,
+  deltaPosition,
+  type,
+  config,
 }: {
   el: HTMLElement
   deltaPosition: Position

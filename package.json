@@ -47,7 +47,7 @@
     "vue": "^3.0.0"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^0.43.1",
+    "@antfu/eslint-config": "^2.8.0",
     "@iconify-json/carbon": "^1.1.30",
     "@types/node": "^20.11.24",
     "@vitejs/plugin-vue-jsx": "^3.1.0",
@@ -67,17 +67,8 @@
     "pre-commit": "pnpm exec lint-staged"
   },
   "lint-staged": {
-    "*.{js,ts,tsx,vue,json,md,yaml,yml}": [
+    "*": [
       "eslint --fix"
-    ]
-  },
-  "eslintConfig": {
-    "extends": "@antfu",
-    "ignorePatterns": [
-      "dist",
-      "node_modules",
-      "docs/.vitepress/dist",
-      "docs/.vitepress/cache"
     ]
   }
 }

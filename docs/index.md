@@ -10,9 +10,8 @@ hero:
     alt: Vue Resizables
   actions:
     - theme: brand
-      text: Get Started 
+      text: Get Started
       link: /get-started/
-  
 
 # features:
 #   - title: Feature A
@@ -22,4 +21,3 @@ hero:
 #   - title: Feature C
 #     details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
 ---
-

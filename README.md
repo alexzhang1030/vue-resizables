@@ -16,4 +16,4 @@ See [docs](https://vue-resizables.vercel.app/)
 
 ## License
 
-MIT 
+MIT

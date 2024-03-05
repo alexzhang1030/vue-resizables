@@ -1,4 +1,4 @@
-import { type Directive } from 'vue'
+import type { Directive } from 'vue'
 import { useResizable } from '@/composables'
 import type { ResizableConfig } from '@/types'
 
