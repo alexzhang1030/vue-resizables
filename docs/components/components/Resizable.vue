@@ -15,6 +15,9 @@ const { width, height } = useElementSize(el)
         bottom: true,
       },
       border: true,
+      onSizeChange: (size) => {
+        console.log('newSize', size)
+      },
     }"
   >
     <div ref="el" class="bg-#42B88345 flex justify-center items-center flex-wrap w-full h-full">
