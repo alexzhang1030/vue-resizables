@@ -24,7 +24,7 @@ const { width, height } = useElementSize(el)
           size: 2,
         },
       },
-    }" class="w-300px h-300px bg-#42B88345 flex justify-center items-center flex-wrap"
+    }" class="relative w-300px h-300px bg-#42B88345 flex justify-center items-center flex-wrap"
   >
     width: {{ width }}<br>
     height: {{ height }}

@@ -41,10 +41,9 @@ export function useResizable(el: MaybeElementRef<ResizableEl | null>, resizableC
   watch(() => toValue(el), (element) => {
     if (!element)
       return
-
     if (shouldRenderBorder(config.value.border))
       renderBorder(element, config.value, payload.moveType)
-  })
+  }, { immediate: true })
 
   return { ...payload, size }
 }

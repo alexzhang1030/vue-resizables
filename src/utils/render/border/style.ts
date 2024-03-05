@@ -17,17 +17,16 @@ const ds = {
 
 // translates
 const t = {
-  /// default theme
-  //
+  // default x negative / default y negative
   dxn: 'translate-x--2.5px',
   dyn: 'translate-y--2.5px',
-  //
+  // default_x_positive_full / default_x_negative_full
   dxpf: 'translate-x-50%',
   dxnf: 'translate-x--50%',
   // default_y_positive_full / default_y_negative_full
   dypf: 'translate-y-50%',
   dynf: 'translate-y--50%',
-  /// sticky theme
+  // sticky x negative/positive / sticky y negative/positive
   sxn: 'translate-x-50%',
   syn: 'translate-y-50%',
   sxp: 'translate-x--50%',
