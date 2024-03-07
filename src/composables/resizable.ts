@@ -84,7 +84,6 @@ export function registerPointerEvents(el: MaybeElementRef<HTMLElement | null>, c
     const listenEl = window.document.body
 
     useEventListener(listenEl, 'pointermove', useThrottleFn((e: MouseEvent) => {
-      e.stopPropagation()
       const { clientX: x, clientY: y } = e
 
       if (isDragging.value) {
