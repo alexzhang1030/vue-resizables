@@ -49,18 +49,18 @@
   "devDependencies": {
     "@antfu/eslint-config": "^2.8.0",
     "@iconify-json/carbon": "^1.1.31",
-    "@types/node": "^20.11.28",
+    "@types/node": "^20.11.30",
     "@vitejs/plugin-vue-jsx": "^3.1.0",
     "@vueuse/core": "^10.9.0",
     "bumpp": "^9.4.0",
     "eslint": "^8.57.0",
     "lint-staged": "^15.2.2",
     "simple-git-hooks": "^2.11.0",
-    "typescript": "^5.4.2",
+    "typescript": "^5.4.3",
     "unocss": "^0.58.6",
-    "vite": "^5.1.6",
+    "vite": "^5.2.6",
     "vite-plugin-dts": "^3.7.3",
-    "vitepress": "1.0.0-rc.45",
+    "vitepress": "1.0.1",
     "vue": "^3.4.21"
   },
   "simple-git-hooks": {
