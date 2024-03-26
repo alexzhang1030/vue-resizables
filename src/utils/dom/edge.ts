@@ -1,4 +1,4 @@
-import type { IsInEdgeResult } from '@/types'
+import type { IsInEdgeResult, ResizableConfigResolved } from '@/types'
 import { BaseEdge, ExtendedEdge } from '@/types'
 
 export function isInAround(el: HTMLElement, x: number, y: number, tolerance: number) {
@@ -29,5 +29,22 @@ export function isInEdge(element: HTMLElement, x: number, y: number, tolerance: 
     [ExtendedEdge.TOP_RIGHT]: result[BaseEdge.RIGHT] && result[BaseEdge.TOP],
     [ExtendedEdge.BOTTOM_LEFT]: result[BaseEdge.LEFT] && result[BaseEdge.BOTTOM],
     [ExtendedEdge.BOTTOM_RIGHT]: result[BaseEdge.RIGHT] && result[BaseEdge.BOTTOM],
+  }
+}
+
+export function checkEnabledEdgeDirection(edge: ResizableConfigResolved['edge']) {
+  let horizontal = false
+  let vertical = false
+  if (edge.left || edge.right)
+    horizontal = true
+  if (edge.top || edge.bottom)
+    vertical = true
+  if (edge['top-left'] || edge['top-right'] || edge['bottom-left'] || edge['bottom-right']) {
+    horizontal = true
+    vertical = true
+  }
+  return {
+    horizontal,
+    vertical,
   }
 }

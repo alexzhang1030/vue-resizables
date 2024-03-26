@@ -27,6 +27,7 @@ export const defaultConfig: ResizableConfigResolved = {
     },
   },
   scale: 1,
+  onSizeChange(_size) {},
 }
 
 function autoEnableExtendedEdges(edge: Partial<ResizableConfig['edge']>): ResizableConfig['edge'] {

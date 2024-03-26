@@ -1,4 +1,5 @@
 import type { Position } from '@vueuse/core'
+import { checkEnabledEdgeDirection } from './edge'
 import type { Edge, ResizableConfigResolved, ResizableEl, ResizableSizeConfig } from '@/types'
 import { BaseEdge, ExtendedEdge } from '@/types'
 
@@ -40,10 +41,15 @@ export function updateSize({
   const { width, height } = calcSize(deltaPosition, el, type)
   const { w, h } = resolveLimit({ width, height, config: config.size, el })
 
+  // check enabled edge direction, and update enabled w/h
+  const { vertical, horizontal } = checkEnabledEdgeDirection(config.edge)
+
   const scaledW = w / config.scale
   const scaledH = h / config.scale
-  el.style.width = `${scaledW}px`
-  el.style.height = `${scaledH}px`
+  if (vertical)
+    el.style.height = `${scaledH}px`
+  if (horizontal)
+    el.style.width = `${scaledW}px`
 
   return { w: scaledW, h: scaledH }
 }
