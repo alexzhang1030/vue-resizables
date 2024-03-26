@@ -39,10 +39,7 @@ export function checkEnabledEdgeDirection(edge: ResizableConfigResolved['edge'])
     horizontal = true
   if (edge.top || edge.bottom)
     vertical = true
-  if (edge['top-left'] || edge['top-right'] || edge['bottom-left'] || edge['bottom-right']) {
-    horizontal = true
-    vertical = true
-  }
+  // combined-edges will auto-enabled, so we skip the detection
   return {
     horizontal,
     vertical,
