@@ -10,6 +10,11 @@ function shouldRenderBorder(config: ResizableConfig['border']) {
   return (typeof config === 'object' && config.render) || config
 }
 
+/**
+ * Only operate one resizable element at a time
+ */
+const isOperating = ref(false)
+
 export function useResizable(el: MaybeElementRef<ResizableEl | null>, resizableConfig?: MaybeRefOrGetter<ResizableConfig>) {
   const config = computed(() => {
     return parseConfig(toValue(resizableConfig))
@@ -21,13 +26,19 @@ export function useResizable(el: MaybeElementRef<ResizableEl | null>, resizableC
     handlePointerMove: () => {
       if (!toValue(el))
         return
-
+      if (isOperating.value)
+        return
+      isOperating.value = true
       size.value = updateSize({
         el: toValue(el)!,
         deltaPosition: toValue(payload!.deltaPosition),
         type: toValue(payload!.moveType)!,
         config: config.value,
       })
+    },
+    handlePointerUp() {
+      if (isOperating.value)
+        isOperating.value = false
     },
   })
 
