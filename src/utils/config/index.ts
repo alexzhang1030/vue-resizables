@@ -51,7 +51,7 @@ function autoEnableExtendedEdges(edge: Partial<ResizableConfig['edge']>): Resiza
 }
 
 export function parseConfig(config: Partial<ResizableConfig> | undefined = {}): ResizableConfigResolved {
-  const resolvedConfig = deepMerge(defaultConfig, config)
+  const resolvedConfig = deepMerge({}, defaultConfig, config)
   return {
     ...resolvedConfig,
     border: config.border ?? defaultConfig.border,
