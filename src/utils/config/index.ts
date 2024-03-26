@@ -1,4 +1,5 @@
 import { deepMerge, notDefined } from '../common'
+import { checkEnabledEdgeDirection } from '../dom'
 import type { ResizableConfig, ResizableConfigResolved } from '@/types'
 import { BaseEdge, ExtendedEdge } from '@/types'
 
@@ -28,6 +29,10 @@ export const defaultConfig: ResizableConfigResolved = {
   },
   scale: 1,
   onSizeChange(_size) {},
+  enabledEdgeDirection: {
+    horizontal: false,
+    vertical: false,
+  },
 }
 
 function autoEnableExtendedEdges(edge: Partial<ResizableConfig['edge']>): ResizableConfig['edge'] {
@@ -51,5 +56,6 @@ export function parseConfig(config: Partial<ResizableConfig> | undefined = {}): 
     ...resolvedConfig,
     border: config.border ?? defaultConfig.border,
     edge: autoEnableExtendedEdges(config.edge ?? {}),
+    enabledEdgeDirection: checkEnabledEdgeDirection(resolvedConfig.edge),
   } as ResizableConfigResolved
 }

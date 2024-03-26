@@ -48,4 +48,8 @@ export interface ResizableConfig {
 export type ResizableConfigResolved = Omit<Required<ResizableConfig>, 'size' | 'tolerance'> & {
   size: ResizableSizeConfig
   tolerance: number
+  enabledEdgeDirection: {
+    horizontal: boolean
+    vertical: boolean
+  }
 }

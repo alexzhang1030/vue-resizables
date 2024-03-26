@@ -14,7 +14,6 @@ const { width, height } = useElementSize(el)
       ref="el" v-resizable="{
         edge: {
           left: true,
-          bottom: true,
         },
         border: true,
       }" class="w-300px h-300px bg-#42B88345 flex justify-center items-center flex-wrap"
