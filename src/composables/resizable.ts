@@ -1,6 +1,5 @@
 import type { MaybeElementRef, MaybeRefOrGetter, Position } from '@vueuse/core'
 import { toValue, useEventListener, useThrottleFn } from '@vueuse/core'
-import type { Ref } from 'vue'
 import { computed, ref, watch } from 'vue'
 
 import { useCursors } from './cursor'
@@ -11,40 +10,23 @@ function shouldRenderBorder(config: ResizableConfig['border']) {
   return (typeof config === 'object' && config.render) || config
 }
 
-/**
- * Only operate one resizable element at a time
- */
-const operatingId = ref<number | null>(null)
-
-let globalId = 0
-
 export function useResizable(el: MaybeElementRef<ResizableEl | null>, resizableConfig?: MaybeRefOrGetter<ResizableConfig>) {
-  const id = ++globalId
-
   const config = computed(() => {
     return parseConfig(toValue(resizableConfig))
   })
 
   const size = ref({} as ReturnType<typeof updateSize>)
 
-  const isPaused = computed(() => !!operatingId.value && operatingId.value !== id)
-  const isOperating = computed(() => operatingId.value === id)
-
-  const payload = registerPointerEvents(el, toValue(config), isPaused, {
+  const payload = registerPointerEvents(el, toValue(config), {
     handlePointerMove: () => {
       if (!toValue(el))
         return
-      operatingId.value = id
       size.value = updateSize({
         el: toValue(el)!,
         deltaPosition: toValue(payload!.deltaPosition),
         type: toValue(payload!.moveType)!,
         config: config.value,
       })
-    },
-    handlePointerUp() {
-      if (isOperating.value)
-        operatingId.value = null
     },
   })
 
@@ -77,7 +59,6 @@ interface PointerEventHandlers {
 export function registerPointerEvents(
   el: MaybeElementRef<HTMLElement | null>,
   config: ResizableConfigResolved,
-  isPaused: Ref<boolean>,
   handlers?: PointerEventHandlers,
   isIgnoreEdgeCheck = false,
 ) {
@@ -107,8 +88,6 @@ export function registerPointerEvents(
     const listenEl = window.document.body
 
     useEventListener(listenEl, 'pointermove', useThrottleFn((e: MouseEvent) => {
-      if (isPaused.value)
-        return
       const { clientX: x, clientY: y } = e
 
       if (isDragging.value) {
@@ -148,7 +127,7 @@ export function registerPointerEvents(
     }, config.throttleTime))
 
     useEventListener(listenEl, 'pointerdown', (e: MouseEvent) => {
-      if (e.button !== 0 || isPaused.value) // ignore non-left click down
+      if (e.button !== 0) // ignore non-left click down
         return
       if (!canDrag.value)
         return
@@ -163,8 +142,6 @@ export function registerPointerEvents(
     })
 
     useEventListener(listenEl, 'pointerleave', (e: MouseEvent) => {
-      if (isPaused.value)
-        return
       isDragging.value = false
       handlePointerLeave?.(e)
     })
