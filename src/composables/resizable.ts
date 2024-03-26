@@ -1,6 +1,7 @@
 import type { MaybeElementRef, MaybeRefOrGetter, Position } from '@vueuse/core'
 import { toValue, useEventListener, useThrottleFn } from '@vueuse/core'
-import { computed, ref, watch } from 'vue'
+import type { Ref } from 'vue'
+import { computed, ref, watch, watchEffect } from 'vue'
 
 import { useCursors } from './cursor'
 import type { Edge, ResizableConfig, ResizableConfigResolved, ResizableEl } from '@/types'
@@ -10,14 +11,24 @@ function shouldRenderBorder(config: ResizableConfig['border']) {
   return (typeof config === 'object' && config.render) || config
 }
 
+let globalId = 0
+
+/**
+ * Only one resizable element can be operated at the same time
+ */
+const operatingId = ref<number | null>(null)
+
 export function useResizable(el: MaybeElementRef<ResizableEl | null>, resizableConfig?: MaybeRefOrGetter<ResizableConfig>) {
+  const id = ++globalId
+
   const config = computed(() => {
     return parseConfig(toValue(resizableConfig))
   })
 
   const size = ref({} as ReturnType<typeof updateSize>)
+  const paused = computed(() => !!operatingId.value && operatingId.value !== id)
 
-  const payload = registerPointerEvents(el, toValue(config), {
+  const payload = registerPointerEvents(el, toValue(config), paused, {
     handlePointerMove: () => {
       if (!toValue(el))
         return
@@ -27,6 +38,13 @@ export function useResizable(el: MaybeElementRef<ResizableEl | null>, resizableC
         type: toValue(payload!.moveType)!,
         config: config.value,
       })
+    },
+    handlePointerUp: () => {
+      operatingId.value = null
+    },
+    handleDragAbilityChange: (canDrag) => {
+      if (canDrag)
+        operatingId.value = id
     },
   })
 
@@ -54,11 +72,13 @@ interface PointerEventHandlers {
   handlePointerDown?: (e: MouseEvent) => void
   handlePointerUp?: (e: MouseEvent) => void
   handlePointerLeave?: (e: MouseEvent) => void
+  handleDragAbilityChange?: (canDrag: boolean) => void
 }
 
 export function registerPointerEvents(
   el: MaybeElementRef<HTMLElement | null>,
   config: ResizableConfigResolved,
+  paused: Ref<boolean>,
   handlers?: PointerEventHandlers,
   isIgnoreEdgeCheck = false,
 ) {
@@ -67,11 +87,13 @@ export function registerPointerEvents(
     handlePointerDown,
     handlePointerUp,
     handlePointerLeave,
+    handleDragAbilityChange,
   } = handlers ?? {
     handlePointerDown: undefined,
     handlePointerLeave: undefined,
     handlePointerMove: undefined,
     handlePointerUp: undefined,
+    handleDragAbilityChange: undefined,
   }
 
   const isDragging = ref(false)
@@ -79,6 +101,12 @@ export function registerPointerEvents(
   const moveType = ref<Edge | null>(null)
   const previousPosition = ref<Position>({ x: 0, y: 0 })
   const deltaPosition = ref<Position>({ x: 0, y: 0 })
+
+  watchEffect(() => {
+    if (paused.value)
+      return
+    handleDragAbilityChange?.(canDrag.value)
+  })
 
   watch(() => toValue(el), (element) => {
     if (!element)
@@ -88,6 +116,8 @@ export function registerPointerEvents(
     const listenEl = window.document.body
 
     useEventListener(listenEl, 'pointermove', useThrottleFn((e: MouseEvent) => {
+      if (paused.value)
+        return
       const { clientX: x, clientY: y } = e
 
       if (isDragging.value) {
@@ -127,6 +157,8 @@ export function registerPointerEvents(
     }, config.throttleTime))
 
     useEventListener(listenEl, 'pointerdown', (e: MouseEvent) => {
+      if (paused.value)
+        return
       if (e.button !== 0) // ignore non-left click down
         return
       if (!canDrag.value)
@@ -137,11 +169,15 @@ export function registerPointerEvents(
     })
 
     useEventListener(listenEl, 'pointerup', (e: MouseEvent) => {
+      if (paused.value)
+        return
       isDragging.value = false
       handlePointerUp?.(e)
     })
 
     useEventListener(listenEl, 'pointerleave', (e: MouseEvent) => {
+      if (paused.value)
+        return
       isDragging.value = false
       handlePointerLeave?.(e)
     })
