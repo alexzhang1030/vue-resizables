@@ -168,7 +168,10 @@ export function registerPointerEvents(
       handlePointerDown?.(e)
     })
 
-    useEventListener(listenEl, 'pointerup', (e: MouseEvent) => {
+    /**
+     * pointer up should be listened on document
+     */
+    useEventListener(document, 'pointerup', (e: MouseEvent) => {
       if (paused.value)
         return
       isDragging.value = false
