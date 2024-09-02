@@ -68,6 +68,7 @@ export function resolveLimit({ width, height, config, el }: {
 export function calculatePixelValue(value: string | number, el: ResizableEl) {
   if (typeof value === 'number')
     return value
+  // eslint-disable-next-line regexp/no-misleading-capturing-group
   const [_, number, unit] = value.match(/(\d+)(.+)/) ?? [null, null, null]
   if (!unit || !number)
     throw new Error(`${value} is not a valid value`)

@@ -68,10 +68,10 @@ const Border = defineComponent({
     return () => (
       <>
         {
-        renderList.value.map(edge => (
-          <BorderItem edge={edge} key={edge} config={props.config.border} />
-        ))
-      }
+          renderList.value.map(edge => (
+            <BorderItem edge={edge} key={edge} config={props.config.border} />
+          ))
+        }
       </>
     )
   },
