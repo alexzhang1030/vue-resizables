@@ -39,6 +39,7 @@ export const PanelGroup = defineComponent({
 
     const defaultSlots = slots?.default?.() || []
     const defaultSlotsLen = defaultSlots?.length
+    const paused = ref(false)
 
     onMounted(() => {
       if (defaultSlotsLen > 2) {
@@ -52,6 +53,7 @@ export const PanelGroup = defineComponent({
             const { deltaPosition } = registerPointerEvents(
               curr.el as HTMLElement,
               config,
+              paused,
               {
                 handlePointerMove: () => {
                   updateSize({
