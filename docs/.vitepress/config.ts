@@ -1,7 +1,7 @@
 import { resolve } from 'node:path'
 import JSX from '@vitejs/plugin-vue-jsx'
-import { defineConfig } from 'vitepress'
 import UnoCSS from 'unocss/vite'
+import { defineConfig } from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({

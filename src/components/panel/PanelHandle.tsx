@@ -1,8 +1,8 @@
-import type { PropType } from 'vue'
-import { defineComponent, h, inject } from 'vue'
-import type { PanelGroupSharedProps } from './PanelGroup'
-import { PanelGroupSharedPropsKey } from './PanelGroup'
 import type { As } from '@/types'
+import type { PropType } from 'vue'
+import type { PanelGroupSharedProps } from './PanelGroup'
+import { defineComponent, h, inject } from 'vue'
+import { PanelGroupSharedPropsKey } from './PanelGroup'
 
 export const PanelHandleCompName = 'VUE_RESIZABLE_PANEL_HANDLE'
 

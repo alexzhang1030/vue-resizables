@@ -1,2 +1,2 @@
-export * from './resizable'
 export * from './panel'
+export * from './resizable'

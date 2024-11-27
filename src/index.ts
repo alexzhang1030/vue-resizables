@@ -1,10 +1,10 @@
 import 'uno.css'
 
-// directives
-export { vResizable } from './directives'
+// components
+export { Panel, PanelGroup, PanelHandle, Resizable } from './components'
 // composables
 export { useResizable } from './composables'
-// components
-export { Resizable, Panel, PanelHandle, PanelGroup } from './components'
+// directives
+export { vResizable } from './directives'
 // types
 export * from './types'

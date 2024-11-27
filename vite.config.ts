@@ -1,8 +1,8 @@
 import { resolve } from 'node:path'
-import { defineConfig } from 'vite'
 import VueJSX from '@vitejs/plugin-vue-jsx'
-import dts from 'vite-plugin-dts'
 import UnoCSS from 'unocss/vite'
+import { defineConfig } from 'vite'
+import dts from 'vite-plugin-dts'
 
 export default defineConfig({
   build: {

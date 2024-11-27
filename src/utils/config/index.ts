@@ -1,7 +1,7 @@
-import { deepMerge, notDefined } from '../common'
-import { checkEnabledEdgeDirection } from '../dom'
 import type { ResizableConfig, ResizableConfigResolved } from '@/types'
 import { BaseEdge, ExtendedEdge } from '@/types'
+import { deepMerge, notDefined } from '../common'
+import { checkEnabledEdgeDirection } from '../dom'
 
 export const defaultConfig: ResizableConfigResolved = {
   edge: {
