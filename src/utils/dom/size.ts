@@ -1,5 +1,5 @@
-import type { Position } from '@vueuse/core'
 import type { Edge, ResizableConfigResolved, ResizableEl, ResizableSizeConfig } from '@/types'
+import type { Position } from '@vueuse/core'
 import { BaseEdge, ExtendedEdge } from '@/types'
 
 type SizeMappingFn = (p1: { width: number, height: number }, p2: { x: number, y: number }) => { width: number, height: number }
