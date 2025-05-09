@@ -13,9 +13,9 @@
     "vue-resizables": "workspace:*"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^5.2.3",
+    "@vitejs/plugin-vue": "^5.2.4",
     "typescript": "^5.8.3",
-    "vite": "^6.3.2",
-    "vue-tsc": "^2.2.8"
+    "vite": "^6.3.5",
+    "vue-tsc": "^2.2.10"
   }
 }
