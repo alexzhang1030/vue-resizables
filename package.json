@@ -53,7 +53,7 @@
     "@vitejs/plugin-vue-jsx": "^4.2.0",
     "@vueuse/core": "^13.9.0",
     "bumpp": "^10.3.1",
-    "eslint": "^9.38.0",
+    "eslint": "^10.4.1",
     "lint-staged": "^16.2.6",
     "simple-git-hooks": "^2.13.1",
     "typescript": "^5.9.3",
