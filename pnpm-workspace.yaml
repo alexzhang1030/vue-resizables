@@ -5,6 +5,10 @@ onlyBuiltDependencies:
   - simple-git-hooks
   - unrs-resolver
   - '@swc/core'
-trustPolicy: off
-minimumReleaseAge: 0
 dangerouslyAllowAllBuilds: true
+minimumReleaseAge: 0
+trustPolicy: no-downgrade
+trustPolicyExclude:
+  - chokidar
+  - semver
+trustLockfile: true
