@@ -1,6 +1,6 @@
 import type { Edge, IsInEdgeResult, ResizableConfig } from '@/types'
-import { BaseEdge, ExtendedEdge } from '@/types'
 import { ref } from 'vue'
+import { BaseEdge, ExtendedEdge } from '@/types'
 
 const cursors: [Edge, string][] = [
   [ExtendedEdge.TOP_LEFT, 'nwse-resize'],

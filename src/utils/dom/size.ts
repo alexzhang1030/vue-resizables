@@ -1,5 +1,5 @@
-import type { Edge, ResizableConfigResolved, ResizableEl, ResizableSizeConfig } from '@/types'
 import type { Position } from '@vueuse/core'
+import type { Edge, ResizableConfigResolved, ResizableEl, ResizableSizeConfig } from '@/types'
 import { BaseEdge, ExtendedEdge } from '@/types'
 
 type SizeMappingFn = (p1: { width: number, height: number }, p2: { x: number, y: number }) => { width: number, height: number }
@@ -34,9 +34,7 @@ export function updateSize({
   deltaPosition: Position
   type: Edge
   config: ResizableConfigResolved
-},
-
-) {
+}) {
   const { width, height } = calcSize(deltaPosition, el, type)
   const { w, h } = resolveLimit({ width, height, config: config.size, el })
 

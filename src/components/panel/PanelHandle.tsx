@@ -1,6 +1,6 @@
-import type { As } from '@/types'
 import type { PropType } from 'vue'
 import type { PanelGroupSharedProps } from './PanelGroup'
+import type { As } from '@/types'
 import { defineComponent, h, inject } from 'vue'
 import { PanelGroupSharedPropsKey } from './PanelGroup'
 
@@ -22,14 +22,14 @@ export const PanelHandle = defineComponent({
     return () => defaultSlots
       ? h(props.as, {}, defaultSlots)
       : h(props.as, {
-        class: [
-          'rounded-lg flex justify-center items-center bg-gray-300 active:bg-gray-400',
-          isHorizontal.value ? 'cursor-ew-resize' : ' cursor-ns-resize',
-        ],
-      }, h('div', {
-        class: [
-          isHorizontal.value ? 'i-carbon-drag-horizontal' : 'i-carbon-drag-vertical',
-        ],
-      }))
+          class: [
+            'rounded-lg flex justify-center items-center bg-gray-300 active:bg-gray-400',
+            isHorizontal.value ? 'cursor-ew-resize' : ' cursor-ns-resize',
+          ],
+        }, h('div', {
+          class: [
+            isHorizontal.value ? 'i-carbon-drag-horizontal' : 'i-carbon-drag-vertical',
+          ],
+        }))
   },
 })

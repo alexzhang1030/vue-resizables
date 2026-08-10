@@ -1,8 +1,9 @@
 import type { PropType, Ref } from 'vue'
-import { registerPointerEvents } from '@/composables'
-import { type As, BaseEdge, type ResizableConfigResolved } from '@/types'
-import { isPanel, isPanelHandle, updateSize } from '@/utils'
+import type { As, ResizableConfigResolved } from '@/types'
 import { defineComponent, h, onMounted, provide, ref } from 'vue'
+import { registerPointerEvents } from '@/composables'
+import { BaseEdge } from '@/types'
+import { isPanel, isPanelHandle, updateSize } from '@/utils'
 import { defaultConfig } from '../../utils/config/index'
 
 export const PanelGroupCompName = 'VUE_RESIZABLE_PANEL_GROUP'

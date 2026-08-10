@@ -1,5 +1,5 @@
-import type { ResizableBorderConfig, ResizableConfig } from '@/types'
 import type { CSSProperties } from 'vue'
+import type { ResizableBorderConfig, ResizableConfig } from '@/types'
 import { BaseEdge } from '@/types'
 import { oneOf } from '@/utils/common'
 

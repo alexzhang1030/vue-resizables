@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { Resizable } from '@/components'
 import { useElementSize } from '@vueuse/core'
 import { ref } from 'vue'
+import { Resizable } from '@/components'
 
 const el = ref<HTMLElement | null>(null)
 const { width, height } = useElementSize(el)

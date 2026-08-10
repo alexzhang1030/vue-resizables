@@ -1,10 +1,10 @@
-import type { Edge, ResizableConfig, ResizableConfigResolved, ResizableEl } from '@/types'
 import type { MaybeElementRef, MaybeRefOrGetter, Position } from '@vueuse/core'
 import type { Ref } from 'vue'
-import { isInAround, isInEdge, parseConfig, renderBorder, updateSize } from '@/utils'
+import type { Edge, ResizableConfig, ResizableConfigResolved, ResizableEl } from '@/types'
+import { useEventListener, useThrottleFn } from '@vueuse/core'
 
-import { toValue, useEventListener, useThrottleFn } from '@vueuse/core'
-import { computed, ref, watch, watchEffect } from 'vue'
+import { computed, ref, toValue, watch, watchEffect } from 'vue'
+import { isInAround, isInEdge, parseConfig, renderBorder, updateSize } from '@/utils'
 import { useCursors } from './cursor'
 
 function shouldRenderBorder(config: ResizableConfig['border']) {

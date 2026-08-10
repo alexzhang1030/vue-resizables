@@ -1,8 +1,8 @@
-import type { Edge, ResizableBorderConfig, ResizableConfig, ResizableConfigResolved, ResizableEl } from '@/types'
 import type { PropType, Ref } from 'vue'
+import type { Edge, ResizableBorderConfig, ResizableConfig, ResizableConfigResolved, ResizableEl } from '@/types'
+import { computed, defineComponent, render } from 'vue'
 import { BaseEdge, ExtendedEdge } from '@/types'
 import { getIntersection, oneOf } from '@/utils'
-import { computed, defineComponent, render } from 'vue'
 import { getStyles, transpileStyles } from './style'
 
 export const defaultBorderConfig: ResizableBorderConfig = {

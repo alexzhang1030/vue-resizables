@@ -1,5 +1,5 @@
-import type { As } from '@/types'
 import type { PropType } from 'vue'
+import type { As } from '@/types'
 import { defineComponent, h } from 'vue'
 
 export const PanelCompName = 'VUE_RESIZABLE_PANEL'
