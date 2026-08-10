@@ -8,6 +8,8 @@ trustPolicyExclude:
   - semver
 packages:
   - .
+  - playground
+  - docs
 onlyBuiltDependencies:
   - esbuild
   - simple-git-hooks
