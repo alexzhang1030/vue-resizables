@@ -70,13 +70,5 @@
     "*": [
       "eslint --fix"
     ]
-  },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "@swc/core",
-      "esbuild",
-      "simple-git-hooks",
-      "unrs-resolver"
-    ]
   }
 }
