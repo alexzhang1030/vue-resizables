@@ -7,12 +7,6 @@ trustPolicyExclude:
   - chokidar
   - semver
 packages:
-  - .
   - playground
   - docs
-onlyBuiltDependencies:
-  - esbuild
-  - simple-git-hooks
-  - unrs-resolver
-  - '@swc/core'
 trustLockfile: true
