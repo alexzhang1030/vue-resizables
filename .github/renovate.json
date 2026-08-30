@@ -2,5 +2,13 @@
   "extends": [
     "github>alexzhang-dev/renovate-config"
   ],
-  "ignoreDeps": ["@antfu/eslint-config"]
+  "ignoreDeps": ["@antfu/eslint-config"],
+  "packageRules": [
+    {
+      "description": "Root typescript stays on 5.9 until typescript-eslint supports the TS 7.1 API",
+      "matchPackageNames": ["typescript"],
+      "matchUpdateTypes": ["major"],
+      "enabled": false
+    }
+  ]
 }
