@@ -51,7 +51,7 @@
     "@iconify-json/carbon": "^1.2.27",
     "@types/node": "^24.13.6",
     "@vitejs/plugin-vue-jsx": "^5.1.6",
-    "@vueuse/core": "^14.4.0",
+    "@vueuse/core": "^15.0.0",
     "bumpp": "^12.3.0",
     "eslint": "^10.11.0",
     "lint-staged": "^17.5.1",
