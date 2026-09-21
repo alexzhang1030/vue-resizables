@@ -2,7 +2,7 @@
   "name": "vue-resizables",
   "type": "module",
   "version": "0.7.2",
-  "packageManager": "pnpm@12.4.1",
+  "packageManager": "pnpm@12.5.1",
   "description": "The resize utilities of Vue.",
   "author": "alexzhang1030",
   "license": "MIT",
@@ -49,19 +49,19 @@
   "devDependencies": {
     "@antfu/eslint-config": "^6.0.0",
     "@iconify-json/carbon": "^1.2.27",
-    "@types/node": "^24.13.4",
+    "@types/node": "^24.13.6",
     "@vitejs/plugin-vue-jsx": "^5.1.6",
     "@vueuse/core": "^14.4.0",
     "bumpp": "^12.3.0",
-    "eslint": "^10.10.0",
+    "eslint": "^10.11.0",
     "lint-staged": "^17.5.1",
     "simple-git-hooks": "^2.14.0",
     "typescript": "~5.9.3",
-    "unocss": "^66.10.2",
+    "unocss": "^66.10.5",
     "vite": "^8.3.0",
-    "vite-plugin-dts": "^5.1.0",
+    "vite-plugin-dts": "^5.1.1",
     "vitepress": "1.6.4",
-    "vue": "^3.5.42"
+    "vue": "^3.5.43"
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm exec lint-staged"
